@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Paper Submition Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="stylesTemp.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+    <form action="/">
+      <h1>Submit Paper</h1>
+      <fieldset>
+        <legend>
+          <h3>Author Details</h3>
+        </legend>
+        <div  class="account-details">
+          <div class="tooltip"><label>First Name</label><input type="text" value="John" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Middle Initial</label><input style="width: 30px;"type="text" value="E" readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Last Name</label><input type="text" value="Doe" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          <h3>Paper Details</h3>
+        </legend>
+        <div  class="personal-details">
+          <div>
+            <div><label>Paper Title<span class="form-required">*
+            </span></label><input type="text" name="name" required></div>
+            
+            <div>
+              <label>Topics<span class="form-required">*
+              </span><div class="tooltip"><i style="font-size:18px" class="fa fa-info-circle"></i>
+                <span class="tooltiptext">Please indicate the topics that most closely apply to your paper.</span>
+              </div></label> 
+              
+              <select multiple required>
+                <option value="AA">Analysis of Algorithms</option>
+                <option value="APP">Applications</option>
+                <option value="ARC">Architecture</option>
+                <option value="AI">Artificial Intelligence</option>
+                <option value="CE">Computer Engineering</option>
+                <option value="CURR">Curriculum</option>
+                <option value="DST">Data Structures</option>
+                <option value="DB">Databases</option>
+                <option value="DL">Distance Learning</option>
+                <option value="DSY">Distributed Systems</option>
+                <option value="ESI">Ethical/Societal Issues</option>
+                <option value="FYC">First Year Computing</option>
+                <option value="GI">Gender Issues</option>
+                <option value="GW">Grant Writing</option>
+                <option value="GIP">Graphical Image Processing</option>
+                <option value="HCI">Human Computer Interaction</option>
+                <option value="LE">Laboratory Environments</option>
+                <option value="LIT">Literacy</option>
+                <option value="MIC">Mathematics in Computing</option>
+                <option value="MM">Multimedia</option>
+                <option value="NDC">Networking/Data Communications</option>
+                <option value="NMC">Non-Major Courses</option>
+                <option value="OOI">Object Oriented Issues</option>
+                <option value="OS">Operating Systems</option>
+                <option value="PP">Parallel Processing</option>
+                <option value="PGG">Pedagogy</option>
+                <option value="PLG">Programming Languages</option>
+                <option value="RSC">Research</option>
+                <option value="SEC">Security</option>
+                <option value="SWE">Software Engineering</option>
+                <option value="SAD">Systems Analysis and Design</option>
+                <option value="TEC">Using Technology in the Classroom</option>
+                <option value="WIP">Web and Internet Programming</option>
+                <option value="OTH">Other</option>
+
+              </select>
+            </div>
+            <div><label>Upload Paper<span class="form-required">*
+            </span></label><input type="file" name="name" required></div>
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit" href="/">Submit</button>
+    </form>
+    </div> 
+  </body>
+</html>
+
+
+
+
