@@ -3,16 +3,26 @@
   <title>Management</title>
   <script language="javascript" src="scripts/nav.js"></script>
 <link rel="stylesheet" href="styles/stylesManagement.css">
+<link rel="stylesheet" href="styles/stylesNAV.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <body>
   
-<div class="container" id="myBtnContainer">
+<div class="container" id="myBtnContainer" style="float: inline-end;">
   <button class="btn active" onclick="filterSelection('all')"> Show all</button>
   <button class="btn" onclick="filterSelection('authors')"> Authors</button>
   <button class="btn" onclick="filterSelection('reviewers')"> Reviewers</button>
   <button class="btn" onclick="filterSelection('papers')"> Papers</button>
   <button class="btn" onclick="filterSelection('reviews')"> Reviews</button>
+
+<div class="dropdown" style="float: right; background-color: black; margin-right: 15px; ">
+  <button class="dropbtn" style="height: 50px;">Add</button><div class="dropdown-content">
+  <h4>Author</h4>
+  <h4>Reviewer</h4>
+  <h4>Paper</h4>
+  <h4>Review</h4>
+  </div>
+</div>
 </div>
 
 <div class="container">
@@ -84,6 +94,7 @@
     <button class="btninfo">Remove Review</button>
     <button class="btninfo">Edit Review Information</button>
   </div>
+
 </div>
 
 <script>
