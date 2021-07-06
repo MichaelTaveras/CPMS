@@ -22,6 +22,15 @@ def Forgot():
 
 @app.route('/LoginForm')
 def LoginForm():
+    msg = ''
+    if request.method == 'POST':
+        results = log_in(db, dict(request.form))
+        if not results:
+            flash('Wrong login information. Please try again.')
+            return render_template('LoginForm.html')
+        flash('You have been successfully logged in.')
+        return redirect(url_for('PaperPage'), msg = msg)
+
     return render_template('LoginForm.html')
 
 @app.route('/Management')
