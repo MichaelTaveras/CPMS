@@ -125,7 +125,7 @@ def RegistrationForm():
             return redirect(url_for('index'))
             
 
-    return render_template('LoginForm.html', user=current_user)
+    return render_template('RegistrationForm.html', user=current_user)
 
 @app.route('/reviewerViewForm')
 def reviewerViewForm():
