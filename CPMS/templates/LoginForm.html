@@ -9,15 +9,16 @@
     </style>
   </head>
   <body>
-    <form action="/action_page.php">
+    <form method="POST">
+    <!-- <form action="/action_page.php"> -->
  <h1>Login</h1>
  <div class="formcontainer">
  <hr/>
  <div class="container">
-   <label for="uname"><strong>Username</strong></label>
-   <input type="text" placeholder="Enter Username" name="uname" required>
-   <label for="psw"><strong>Password</strong></label>
-   <input type="password" placeholder="Enter Password" name="psw" required>
+   <label for="EmailAddress"><strong>Email Address</strong></label>
+   <input type="text" placeholder="Enter email" name="EmailAddress" required>
+   <label for="Password"><strong>Password</strong></label>
+   <input type="password" placeholder="Enter Password" name="Password" required>
  </div>
  <button type="submit">Login</button>
  <div class="container" style="background-color: #eee">

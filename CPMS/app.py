@@ -3,6 +3,7 @@ import sqlalchemy
 import re
 
 app = Flask(__name__ )
+app.config['SECRET_KEY'] = 'iTried'
 
 @app.route('/')
 def index():
@@ -20,16 +21,19 @@ def authorViewForm():
 def Forgot():
     return render_template('Forgot.html')
 
-@app.route('/LoginForm')
+@app.route('/LoginForm', methods=['GET','POST'])
 def LoginForm():
-    msg = ''
-    if request.method == 'POST':
-        results = log_in(db, dict(request.form))
-        if not results:
-            flash('Wrong login information. Please try again.')
-            return render_template('LoginForm.html')
-        flash('You have been successfully logged in.')
-        return redirect(url_for('PaperPage'), msg = msg)
+    # data = request.form
+    # print(data)
+
+    # msg = ''
+    # if request.method == 'POST':
+    #     results = log_in(db, dict(request.form))
+    #     if not results:
+    #         flash('Wrong login information. Please try again.')
+    #         return render_template('LoginForm.html')
+    #     flash('You have been successfully logged in.')
+    #     return redirect(url_for('PaperPage'), msg = msg)
 
     return render_template('LoginForm.html')
 
@@ -49,8 +53,36 @@ def PaperReview():
 def paperSubmitForm():
     return render_template('paperSubmitForm.html')
 
-@app.route('/RegistrationForm')
+@app.route('/RegistrationForm',methods=['GET','POST'])
 def RegistrationForm():
+    if request.method == 'POST':
+        fname = request.form.get('FirstName')
+        midIn = request.form.get('MiddleInitial')
+        lname = request.form.get('LastName')
+
+        affil = request.form.get('Affiliation')
+        dep = request.form.get('Department')
+        
+        address = request.form.get('Address')
+        city = request.form.get('City')
+        state = request.form.get('State')
+        zip = request.form.get('Zip')
+
+        email = request.form.get('EmailAddress')
+        phone = request.form.get('PhoneNumber')
+        password = request.form.get('Password')
+
+        if len(email) < 5:
+            flash('Email must be greater than 5 characters.', category='error')
+           
+        elif len(password) != 5:
+           flash('Password must be 5 characters.', category='error')
+        else:
+            pass
+            # to database
+
+
+
     return render_template('RegistrationForm.html')
 
 @app.route('/reviewerViewForm')
