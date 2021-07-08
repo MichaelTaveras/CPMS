@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session
 import sqlalchemy
-import re
+from .models import Author
+from werkzeug.security import generate_password_hash, check_password_hash # hides password
+from . import db
+
 
 app = Flask(__name__ )
 app.config['SECRET_KEY'] = 'iTried'
@@ -23,19 +26,23 @@ def Forgot():
 
 @app.route('/LoginForm', methods=['GET','POST'])
 def LoginForm():
-    # data = request.form
-    # print(data)
+    if request.method == 'POST':
+        email = request.form.get('EmailAddress')
+        password = request.form.get('Password')
 
-    # msg = ''
-    # if request.method == 'POST':
-    #     results = log_in(db, dict(request.form))
-    #     if not results:
-    #         flash('Wrong login information. Please try again.')
-    #         return render_template('LoginForm.html')
-    #     flash('You have been successfully logged in.')
-    #     return redirect(url_for('PaperPage'), msg = msg)
+        author = Author.query.filter_by(EmailAddress='email').first()
+
+        if author:
+            if check_password_hash(author.Password, password):
+                 flash('You have been successfully logged in.', category='succes')
+                 return redirect(url_for('index'))
+            else:
+                 flash('Wrong password. Please try again.', category='error')
+        else:
+            flash('Email does not exist.  Please try again.', category='error')
 
     return render_template('LoginForm.html')
+        
 
 @app.route('/Management')
 def Management():
@@ -72,14 +79,36 @@ def RegistrationForm():
         phone = request.form.get('PhoneNumber')
         password = request.form.get('Password')
 
+        author = Author.query.filter_by(EmailAddress='email').first()
+
+        if author:
+            flash("Email already exits. Try again.", category='error')
         if len(email) < 5:
             flash('Email must be greater than 5 characters.', category='error')
            
         elif len(password) != 5:
            flash('Password must be 5 characters.', category='error')
         else:
-            pass
+            newAuthor = Author(
+                FirstName = fname,
+                MiddleInitial = midIn,
+                LastName = lname,
+                Affiliation = affil,
+                Department = dep,
+                Address = address,
+                City = city,
+                State = state,
+                ZipCode = zip,
+                EmailAddress = email,
+                PhoneNumber = phone,
+                Password = generate_password_hash(password, method='sha256'))
+
             # to database
+            # db.session.add(newAuthor)
+            # db.session.commit()
+            flash('Account created!', category='success')
+            return redirect(url_for('index'))
+            
 
 
 

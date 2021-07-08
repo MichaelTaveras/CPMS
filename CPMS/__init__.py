@@ -6,8 +6,10 @@ db = SQLAlchemy()
 
 def create_app():
     myapp = Flask(__name__)
-    myapp.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc:MICHAELTAVERASD/LendApp'
     myapp.config['SECRET_KEY'] = 'iTried'
+    myapp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    myapp.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc:MICHAELTAVERASD/LendApp' #add correct database
+    
 
     db.init_app(myapp)
 
@@ -19,4 +21,3 @@ def create_app():
 
 
 
-SQLALCHEMY_TRACK_MODIFICATIONS = False
