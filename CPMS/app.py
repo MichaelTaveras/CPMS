@@ -1,14 +1,20 @@
-from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session
+from os import remove
+from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session, Blueprint
 import sqlalchemy
 from .models import Author
 from werkzeug.security import generate_password_hash, check_password_hash # hides password
 from . import db
+from flask_login import login_user, login_required, logout_user, current_user
 
 
-app = Flask(__name__ )
-app.config['SECRET_KEY'] = 'iTried'
+
+# app = Flask(__name__ )
+# app.config['SECRET_KEY'] = 'iTried'
+
+app = Blueprint('app', __name__)
 
 @app.route('/')
+@login_required #cant access page unless user logged in
 def index():
     return render_template('PaperPage.html')
 
@@ -29,20 +35,28 @@ def LoginForm():
     if request.method == 'POST':
         email = request.form.get('EmailAddress')
         password = request.form.get('Password')
+        remember  = request.form.get('remember')
 
         author = Author.query.filter_by(EmailAddress='email').first()
 
         if author:
             if check_password_hash(author.Password, password):
                  flash('You have been successfully logged in.', category='succes')
+                 login_user(author, remember=remember)
                  return redirect(url_for('index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
         else:
             flash('Email does not exist.  Please try again.', category='error')
 
-    return render_template('LoginForm.html')
+    return render_template('LoginForm.html', user=current_user)
         
+
+@app.route('/logout')
+@login_required #cant access page unless user logged in
+def LogOut():
+    logout_user()
+    return redirect(url_for('LoginForm'))
 
 @app.route('/Management')
 def Management():
@@ -106,13 +120,12 @@ def RegistrationForm():
             # to database
             # db.session.add(newAuthor)
             # db.session.commit()
+            login_user(newAuthor, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('index'))
             
 
-
-
-    return render_template('RegistrationForm.html')
+    return render_template('LoginForm.html', user=current_user)
 
 @app.route('/reviewerViewForm')
 def reviewerViewForm():
@@ -126,6 +139,6 @@ def reviewSubmitForm():
 def viewForm():
     return render_template('viewForm.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+
     #app.run(host="localhost", port=8010, debug=True)
