@@ -1,7 +1,7 @@
 from os import remove
 from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session, Blueprint
 import sqlalchemy
-from .models import Author
+from .models import Author, Reviewer
 from werkzeug.security import generate_password_hash, check_password_hash # hides password
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -77,6 +77,8 @@ def paperSubmitForm():
 @app.route('/RegistrationForm',methods=['GET','POST'])
 def RegistrationForm():
     if request.method == 'POST':
+        userType = request.form.get('type')
+        
         fname = request.form.get('FirstName')
         midIn = request.form.get('MiddleInitial')
         lname = request.form.get('LastName')
@@ -93,9 +95,12 @@ def RegistrationForm():
         phone = request.form.get('PhoneNumber')
         password = request.form.get('Password')
 
-        author = Author.query.filter_by(EmailAddress='email').first()
+        
 
-        if author:
+        author = Author.query.filter_by(EmailAddress='email').first()
+        reviewer = Reviewer.query.filter_by(EmailAddress='email').first()
+
+        if author or reviewer:
             flash("Email already exits. Try again.", category='error')
         if len(email) < 5:
             flash('Email must be greater than 5 characters.', category='error')
@@ -103,24 +108,40 @@ def RegistrationForm():
         elif len(password) != 5:
            flash('Password must be 5 characters.', category='error')
         else:
-            newAuthor = Author(
-                FirstName = fname,
-                MiddleInitial = midIn,
-                LastName = lname,
-                Affiliation = affil,
-                Department = dep,
-                Address = address,
-                City = city,
-                State = state,
-                ZipCode = zip,
-                EmailAddress = email,
-                PhoneNumber = phone,
-                Password = generate_password_hash(password, method='sha256'))
-
+            if userType == 'author':
+                newUser = Author(
+                    FirstName = fname,
+                    MiddleInitial = midIn,
+                    LastName = lname,
+                    Affiliation = affil,
+                    Department = dep,
+                    Address = address,
+                    City = city,
+                    State = state,
+                    ZipCode = zip,
+                    EmailAddress = email,
+                    PhoneNumber = phone,
+                    Password = generate_password_hash(password, method='sha256'))
+            elif userType == 'reviewer':
+                newUser = Reviewer(
+                    FirstName = fname,
+                    MiddleInitial = midIn,
+                    LastName = lname,
+                    Affiliation = affil,
+                    Department = dep,
+                    Address = address,
+                    City = city,
+                    State = state,
+                    ZipCode = zip,
+                    EmailAddress = email,
+                    PhoneNumber = phone,
+                    Password = generate_password_hash(password, method='sha256'))
+            else:
+                print("Error on user type")
             # to database
-            # db.session.add(newAuthor)
+            # db.session.add(newUser)
             # db.session.commit()
-            login_user(newAuthor, remember=True)
+            login_user(newUser, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('index'))
             

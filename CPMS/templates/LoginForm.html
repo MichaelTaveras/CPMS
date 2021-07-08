@@ -21,10 +21,14 @@
    <input type="password" placeholder="Enter Password" name="Password" required>
  </div>
  <button type="submit">Login</button>
+
  <div class="container" style="background-color: #eee">
    <label style="padding-left: 15px">
-   <input type="checkbox"  checked="checked" name="remember"> Remember me
-   </label>
+   <input type="checkbox"  checked="checked" name="remember"> Remember me </label>
+   
+
+   <!-- <div></div> -->
+   <span class="signup"><a href="{{ url_for('app.RegistrationForm') }}">Sign Up</a></span>
    <span class="psw"><a href="{{ url_for('app.Forgot') }}"> Forgot password?</a></span>
  </div>
     </form>

@@ -28,6 +28,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return Author.query.get(int(id))
+        # login reviewer
 
     return myapp
 
