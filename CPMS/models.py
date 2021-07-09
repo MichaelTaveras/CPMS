@@ -1,9 +1,10 @@
 from . import db
 from flask_login import UserMixin
+# from sqlalchemy.sql import func
 
 # model for author
 class Author(db.Model, UserMixin):
-    AuthorID = db.Column(db.Integer, primary_key=True)
+    AuthorID = db.Column(db.Integer, primary_key=True,)
     FirstName = db.Column(db.String(50))
     MiddleInitial = db.Column(db.String(1))
     LastName = db.Column(db.String(50))
@@ -16,6 +17,10 @@ class Author(db.Model, UserMixin):
     PhoneNumber = db.Column(db.String(50))
     EmailAddress = db.Column(db.String(100))
     Password = db.Column(db.String(5))
+
+    # uses authorID for getting ID
+    def get_id(self):
+        return self.AuthorID
 
 # model for reviewers
 class Reviewer(db.Model, UserMixin):
@@ -33,3 +38,7 @@ class Reviewer(db.Model, UserMixin):
     EmailAddress = db.Column(db.String(100))
     Password = db.Column(db.String(5))
     # bits for topics
+
+     # uses reviewerID for getting ID
+    def get_id(self):
+        return self.ReviewID
