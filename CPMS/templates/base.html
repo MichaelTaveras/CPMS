@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/styles/stylesNAV.css">
+    <!-- use if statements to alter which stylesheet used -->
+
+
+
+</head>
+<body>
+    <!-- have nav bar be altered according to whether a user is author or reviewer -->
+    
+   <div class="topnav">
+       <!-- use {%if user .....%} -->
+       <a href="PaperPage">
+           <img src="static/images/CPMSLogo.png" style="height: 125px; padding: 10px;"></a>
+        <a href="RegistrationForm" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg></a>
+        <a href="paperSubmitForm" class="link">Upload</a><a href="#"class="link">View</a>
+   <div class="dropdown">
+        <button class="dropbtn">Admin</button>
+        <div class="dropdown-content">
+            <a href="PaperReview">Paper Reviews</a>
+            <a href="Management">Management</a>
+        </div>
+    </div>
+    <!-- {%endif%} -->
+</div>
+<!-- error messages will show -->
+{% with messages = get_flashed_messages(with_categories=true) %} 
+        {% if messages %} 
+          {% for category, message in messages %} 
+            {% if category =='error' %}
+              <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% else %}
+              <div class="alert alert-success alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    <div class="body">{% block content %} 
+        
+        {% endblock %}</div>
+    
+</body>
+</html>
+
+<!-- for all other templates use only the body which will be placed in the body -->

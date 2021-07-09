@@ -13,62 +13,68 @@
   <body>
     <div class="testbox">
 	  <script language="javascript" src="static/scripts/nav.js"></script>
- <form action="/">
-   <div class="banner">
-     <h1>Account Settings</h1>
-   </div>
-   <div class="colums">
-     <div class="item">
-  <label for="fname"> First Name<span>*</span></label>
-  <input id="fname" type="text" name="fname" required/>
-     </div>
 
-     <div class="item">
-  <label for="mI"> Middle Initial<span></span></label>
-  <input id="mI" type="text" name="mI" required/>
-     </div>
+     <form method="POST">
+      <div class="banner">
+        <h1>Account Settings</h1>
+      </div>
 
-     <div class="item">
-  <label for="lname"> Last Name<span>*</span></label>
-  <input id="lname" type="text" name="lname" required/>
-     </div>
-	<div class="item">
-  <label for="affiliation">Affiliation<span>*</span></label>
-  <input id="affiliation" type="text"   name="affiliation" required/>
-     </div>
-	 	<div class="item">
-  <label for="department">Department<span>*</span></label>
-  <input id="department" type="text"   name="department" required/>
-     </div>
-     <div class="item">
-  <label for="address1">Address<span>*</span></label>
-  <input id="address1" type="text"   name="address" required/>
-     </div> 
-     <div class="item">
-  <label for="state">State<span>*</span></label>
-  <input id="state" type="text"   name="state" required/>
-     </div>
-     <div class="item">
-  <label for="zip">Zip/Postal Code<span>*</span></label>
-  <input id="zip" type="text" name="zip" required/>
-     </div>
-     <div class="item">
-  <label for="city">City<span>*</span></label>
-  <input id="city" type="text"   name="city" required/>
-     </div>
-     <div class="item">
-  <label for="eaddress">Email Address<span>*</span></label>
-  <input id="eaddress" type="text"   name="eaddress" required/>
-     </div>
-     <div class="item">
-  <label for="phone">Phone<span>*</span></label>
-  <input id="phone" type="tel"   name="phone" required/>
-     </div>
-   </div>
-   <div class="question">
-     <div class="question-answer">
-     </div>
-   </div>
+      <div class="colums">
+
+        <div class="item">
+     <label for="FirstName">First Name<span>*</span></label>
+     <input id="fname" type="text" name="FirstName" value={{user.FirstName}}/>
+        </div>
+   
+        <div class="item">
+     <label for="MiddleInitial"> Middle Initial<span></span></label>
+     <input id="MiddleInitial" type="text" name="MiddleInitial" value={{user.MiddleInitial}}/>
+        </div>
+   
+        <div class="item">
+     <label for="LastName"> Last Name<span>*</span></label>
+     <input id="LastName" type="text" name="LastName" value={{user.LastName}}/>
+        </div>
+      <div class="item">
+     <label for="Affiliation">Affiliation<span>*</span></label>
+     <input id="Affiliation" type="text"   name="Affiliation" value={{user.Affiliation}}/>
+        </div>
+          <div class="item">
+     <label for="department">Department<span>*</span></label>
+     <input id="department" type="text"   name="Department" value={{user.Department}}/>
+        </div>
+        <div class="item">
+     <label for="Department">Address<span>*</span></label>
+     <input id="Department" type="text"   name="Address" value={{user.Address}}/>
+        </div> 
+        <div class="item">
+     <label for="State">State<span>*</span></label>
+     <input id="State" type="text"   name="State" value={{user.State}}/>
+        </div>
+        <div class="item">
+     <label for="Zip">Zip/Postal Code<span>*</span></label>
+     <input id="Zip" type="text" name="Zip" value={{user.Zip}}/>
+        </div>
+        <div class="item">
+     <label for="City">City<span>*</span></label>
+     <input id="City" type="text"   name="City" value={{user.City}}/>
+        </div>
+        <div class="item">
+     <label for="EmailAddress">Email Address<span>*</span></label>
+     <input id="EmailAddress" type="text"   name="EmailAddress" value={{user.EmailAddress}}/>
+        </div>
+        <div class="item">
+     <label for="PhoneNumber">Phone<span>*</span></label>
+     <input id="PhoneNumber" type="tel"   name="PhoneNumber" value={{user.PhoneNumber}}/>
+        </div>
+     
+      <div class="item">
+       <label for="Password">Password<span>*</span></label>
+       <input id="Password" type="password"   name="Password"/>
+          </div>
+        </div>
+
+<!-- only show if reviewer -->
 <!-- Topics -->
 <h2>Review Topics</h2>
 <label for="topics">Please indicate the topics in which you are knowledable and/or interested. (Note: If you've reviews in the past, you will still need to provide this information as interests do change.) <br>Please select one or more topics. Please type your topic if not listed here: </br>
