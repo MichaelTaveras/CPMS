@@ -20,17 +20,19 @@ def LoginForm():
         remember  = request.form.get('remember')
 
         # looks for user in DB
-        author = Author.query.filter_by(EmailAddress='email').first()
-        reviewer = Reviewer.query.filter_by(EmailAddress='email').first()
+        author = Author.query.filter_by(EmailAddress=email).first()
+        reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
 
         # if user found checks password
         # if wrong password throw error
         # if user not found throw error
+        print(email)
+        print(author)
         if author:
             if check_password_hash(author.Password, password):
                  flash('You have been successfully logged in.', category='succes')
                  login_user(author, remember=remember)
-                 return redirect(url_for('app.index'))
+                 return redirect(url_for('app.index', user=current_user))
             else:
                  flash('Wrong password. Please try again.', category='error')
         elif reviewer:
@@ -74,8 +76,8 @@ def RegistrationForm():
 
         
 
-        author = Author.query.filter_by(EmailAddress='email').first()
-        reviewer = Reviewer.query.filter_by(EmailAddress='email').first()
+        author = Author.query.filter_by(EmailAddress=email).first()
+        reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
 
         if author or reviewer:
             flash("Email already exits. Try again.", category='error')
@@ -159,7 +161,7 @@ def authorViewForm():
 @login_required #cant access page unless user logged in
 def LogOut():
     logout_user()
-    return redirect(url_for('LoginForm'))
+    return redirect(url_for('app.LoginForm'))
 
 @app.route('/Management')
 @login_required

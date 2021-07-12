@@ -42,3 +42,11 @@ class Reviewer(db.Model, UserMixin):
      # uses reviewerID for getting ID
     def get_id(self):
         return self.ReviewID
+
+
+class Paper(db.Model,UserMixin):
+    pass
+
+
+class Review(db.Model,UserMixin):
+    pass
