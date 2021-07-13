@@ -15,16 +15,16 @@
   </head>
   <body>
     <div class="main-block">
-    <form action="/">
+      <form method="POST" enctype="multipart/form-data">
       <h1>Submit Paper</h1>
       <fieldset>
         <legend>
           <h3>Author Details</h3>
         </legend>
         <div  class="account-details">
-          <div class="tooltip"><label>First Name</label><input type="text" value="John" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
-          <div class="tooltip"><label>Middle Initial</label><input style="width: 30px;"type="text" value="E" readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
-          <div class="tooltip"><label>Last Name</label><input type="text" value="Doe" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>First Name</label><input type="text" name = "FirstName" value="{{ user.FirstName }}" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Middle Initial</label><input style="width: 30px;"type="text" name = "MiddleInitial" {{ user.MiddleInitial }}" readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Last Name</label><input type="text" value="{{ user.LastName }}" name = "LastName" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
 
         </div>
       </fieldset>
@@ -35,7 +35,7 @@
         <div  class="personal-details">
           <div>
             <div><label>Paper Title<span class="form-required">*
-            </span></label><input type="text" name="name" required></div>
+            </span></label><input type="text" name="Title" required></div>
             
             <div>
               <label>Topics<span class="form-required">*
@@ -82,11 +82,11 @@
               </select>
             </div>
             <div><label>Upload Paper<span class="form-required">*
-            </span></label><input type="file" name="name" required></div>
+            </span></label><input type="file" name="File" required></div>
           </div>
         </div>
       </fieldset>
-      <button type="submit" href="/">Submit</button>
+      <button type="submit">Submit</button>
     </form>
     </div> 
   </body>

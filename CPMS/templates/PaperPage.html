@@ -45,6 +45,25 @@
                 </button>
               </div>
         {% endif %} {% endfor %} {% endif %} {% endwith %}
+    
+      {% for paper in  current_user.Papers %}
+
+        {% if userType == 'author' %}
+        <div class="separator">
+          {{ paper.Title }} </br>
+          {{current_user.FirstName}} {{current_user.LastName}}, Paper Topics
+            </div>
+          {% endif %}
+
+          {% if userType == 'reviewer' %}
+          <div class="separator">
+            paper.Title </br>
+            Author, Paper Topics
+              </div>
+            {% endif %}
+
+
+      {% endfor %}
 
     <div class="separator">
         PAPER 1 Title </br>

@@ -1,3 +1,4 @@
+from enum import unique
 from . import db
 from flask_login import UserMixin
 # from sqlalchemy.sql import func
@@ -15,8 +16,9 @@ class Author(db.Model, UserMixin):
     State = db.Column(db.String(2))
     ZipCode = db.Column(db.String(10))
     PhoneNumber = db.Column(db.String(50))
-    EmailAddress = db.Column(db.String(100))
+    EmailAddress = db.Column(db.String(100),unique=True)
     Password = db.Column(db.String(5))
+    Papers = db.relationship('Paper')
 
     # uses authorID for getting ID
     def get_id(self):
@@ -35,7 +37,7 @@ class Reviewer(db.Model, UserMixin):
     State = db.Column(db.String(2))
     ZipCode = db.Column(db.String(10))
     PhoneNumber = db.Column(db.String(50))
-    EmailAddress = db.Column(db.String(100))
+    EmailAddress = db.Column(db.String(100), unique=True)
     Password = db.Column(db.String(5))
     # bits for topics
 
@@ -45,8 +47,20 @@ class Reviewer(db.Model, UserMixin):
 
 
 class Paper(db.Model,UserMixin):
-    pass
+    PaperID = db.Column(db.Integer, primary_key=True)
+    AuthorID = db.Column(db.Integer, db.ForeignKey('author.AuthorID'))
+    Active = db.Column(db.LargeBinary(1))
+    FileName = db.Column(db.String(100))
+    FileData = db.Column(db.LargeBinary)
+    Title = db.Column(db.String(500))
+    Certification = db.Column(db.String(3))
+    # bits for topics
 
 
-class Review(db.Model,UserMixin):
-    pass
+
+
+
+ 
+
+# class Review(db.Model,UserMixin):
+#     pass
