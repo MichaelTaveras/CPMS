@@ -112,7 +112,7 @@ def RegistrationForm():
                     ZipCode = zip,
                     EmailAddress = email,
                     PhoneNumber = phone,
-                    Password = generate_password_hash(password, method='sha256')),
+                    Password = generate_password_hash(password, method='sha256'))
                     # other topics need to be added
             else:
                 print("Error on user type")
