@@ -5,6 +5,8 @@ from flask_login import UserMixin
 
 # model for author
 class Author(db.Model, UserMixin):
+    # __tablename__ = 'author'
+
     AuthorID        = db.Column(db.Integer, primary_key=True,)
     FirstName       = db.Column(db.String(50))
     MiddleInitial   = db.Column(db.String(1))
@@ -26,7 +28,9 @@ class Author(db.Model, UserMixin):
 
 # model for reviewers
 class Reviewer(db.Model, UserMixin):
-    ReviewerID       = db.Column(db.Integer, primary_key=True)
+    # __tablename__ = 'reviewer'
+
+    ReviewerID      = db.Column(db.Integer, primary_key=True)
     FirstName       = db.Column(db.String(50))
     MiddleInitial   = db.Column(db.String(1))
     LastName        = db.Column(db.String(50))
@@ -49,6 +53,8 @@ class Reviewer(db.Model, UserMixin):
 
 # model for papers
 class Paper(db.Model,UserMixin):
+    # __tablename__ = 'paper'
+
     PaperID       = db.Column(db.Integer, primary_key=True)
     AuthorID      = db.Column(db.Integer, db.ForeignKey('author.AuthorID'))
     Active        = db.Column(db.LargeBinary(1))
@@ -61,6 +67,8 @@ class Paper(db.Model,UserMixin):
 
 # model for reviews
 class Review(db.Model,UserMixin):
+    # __tablename__ = 'review'
+
     ReviewID      = db.Column(db.Integer, primary_key=True)
     PaperID       = db.Column(db.Integer, db.ForeignKey('paper.PaperID'))
     ReviewerID    = db.Column(db.Integer, db.ForeignKey('reviewer.ReviewerID'))

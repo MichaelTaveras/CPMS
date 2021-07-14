@@ -24,8 +24,13 @@
 
    <!-- using user info example -->
    <!-- only show dev mode -->
-  <span style="color:white;">User: {{ user.EmailAddress }}</span>
-  <span style="color:white;"><a style="color:aliceblue;" href="{{ url_for('app.LogOut') }}">Log Out</a></span>
+   <div style="margin-top: 10px;">
+    <span style="color:black;">User: {{ user.EmailAddress }}<br></span>
+    <span style="color:black;">Type: {{ userType }}<br></span>
+    <span style="color:black;"><a style="color:black;" href="{{ url_for('app.LogOut') }}">Log Out</a></span>
+
+   </div>
+  
   
   {% with messages = get_flashed_messages(with_categories=true) %} 
         {% if messages %} 

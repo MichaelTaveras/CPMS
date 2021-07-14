@@ -27,13 +27,12 @@ def LoginForm():
         # if user found checks password
         # if wrong password throw error
         # if user not found throw error
-        print(email)
-        print(author)
+        
         if author:
             if check_password_hash(author.Password, password):
                  flash('You have been successfully logged in.', category='succes')
                  login_user(author, remember=remember)
-                 return redirect(url_for('app.index', user=current_user))
+                 return redirect(url_for('app.index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
         elif reviewer:
@@ -46,7 +45,7 @@ def LoginForm():
         else:
             flash('Email does not exist.  Please try again.', category='error')
 
-    return render_template('LoginForm.html', user=current_user)
+    return render_template('LoginForm.html')
 
 
 @app.route('/Forgot')
@@ -58,7 +57,7 @@ def Forgot():
 def RegistrationForm():
     if request.method == 'POST':
         userType = request.form.get('type')
-        
+
         fname = request.form.get('FirstName')
         midIn = request.form.get('MiddleInitial')
         lname = request.form.get('LastName')
@@ -76,15 +75,13 @@ def RegistrationForm():
         password = request.form.get('Password')
 
         
-
         author = Author.query.filter_by(EmailAddress=email).first()
         reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
 
         if author or reviewer:
             flash("Email already exits. Try again.", category='error')
-        if len(email) < 5:
+        elif len(email) < 5:
             flash('Email must be greater than 5 characters.', category='error')
-           
         elif len(password) != 5:
            flash('Password must be 5 characters.', category='error')
         else:
@@ -119,6 +116,7 @@ def RegistrationForm():
                     # other topics need to be added
             else:
                 print("Error on user type")
+
             # to database
             db.session.add(newUser)
             db.session.commit()
