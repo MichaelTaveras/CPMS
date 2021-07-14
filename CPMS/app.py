@@ -225,8 +225,6 @@ def PaperReview():
     return render_template('PaperReview.html',user=current_user)
 
 
-
-
 @app.route('/reviewerViewForm')
 @login_required
 def reviewerViewForm():

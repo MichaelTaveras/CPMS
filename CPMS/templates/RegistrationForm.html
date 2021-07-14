@@ -103,17 +103,17 @@
      <label>Registration Type</label>
      <div class="question-answer">
   <div>
-    <input type="radio" value="author" id="radio_1" name="type"/>
-    <label for="radio_1" class="radio"><span>Author (Skip Review Topics Section if chosen)</span></label>
+    <input type="radio" value="author" id="radio_1" name="type" onclick="ShowHideDiv()"/>
+    <label for="radio_1" class="radio"><span>Author</span></label>
   </div>
   <div>
-    <input  type="radio" value="reviewer" id="radio_2" name="type"/>
-    <label for="radio_2" class="radio"><span>Reviewer (Fill out Review Topics Section if chosen)</span></label>
+    <input  type="radio" value="reviewer" id="radio_2" name="type" onclick="ShowHideDiv()"/>
+    <label for="radio_2" class="radio"><span>Reviewer</span></label>
   </div>
      </div>
    </div>
 
-   <div class="question">
+   <div class="question" id="dvtext" style="display: none">
      <div class="question-answer">
       <h2>Review Topics</h2>
       <label for="topics">Please indicate the topics in which you are knowledable and/or interested. (Note: If you've reviews in the past, you will still need to provide this information as interests do change.) <br>Please select one or more topics. Please type your topic if not listed here: </br>
@@ -159,6 +159,17 @@
 
      </div>
    </div>
+
+   
+
+<script>
+function ShowHideDiv() {
+        var chkYes = document.getElementById("radio_2");
+        var dvtext = document.getElementById("dvtext");
+        dvtext.style.display = chkYes.checked ? "block" : "none";
+    }
+
+</script>
 
    <h2>Terms of Service</h2>
    <input type="checkbox" name="checkbox1">
