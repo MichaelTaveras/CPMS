@@ -29,7 +29,17 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return Author.query.get(int(id))
+
+        if Reviewer.query.get(int(id)):
+            print("reviewer found")
+            return Reviewer.query.get(int(id))
+
+        elif Author.query.get(int(id)):
+            print("author found")
+            return Author.query.get(int(id))
+
+        else:
+            print('ERROR')
         # login reviewer
 
     return myapp
@@ -41,5 +51,5 @@ def create_database(app):
     # might not work on different os
     if not path.exists('CPSM/' + DB_NAME): 
         db.create_all(app=app)
-        print('DB Created')
+        # print('DB Created')
 

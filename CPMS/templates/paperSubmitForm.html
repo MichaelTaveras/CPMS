@@ -15,16 +15,16 @@
   </head>
   <body>
     <div class="main-block">
-    <form action="/">
+      <form method="POST" enctype="multipart/form-data">
       <h1>Submit Paper</h1>
       <fieldset>
         <legend>
           <h3>Author Details</h3>
         </legend>
         <div  class="account-details">
-          <div class="tooltip"><label>First Name</label><input type="text" value="John" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
-          <div class="tooltip"><label>Middle Initial</label><input style="width: 30px;"type="text" value="E" readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
-          <div class="tooltip"><label>Last Name</label><input type="text" value="Doe" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>First Name</label><input type="text" name = "FirstName" value="{{ user.FirstName }}" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Middle Initial</label><input style="width: 30px;"type="text" name = "MiddleInitial" {{ user.MiddleInitial }}" readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
+          <div class="tooltip"><label>Last Name</label><input type="text" value="{{ user.LastName }}" name = "LastName" required readonly="readonly"><span class="tooltiptext">Go to settings to change author details.</span></div>
 
         </div>
       </fieldset>
@@ -35,7 +35,7 @@
         <div  class="personal-details">
           <div>
             <div><label>Paper Title<span class="form-required">*
-            </span></label><input type="text" name="name" required></div>
+            </span></label><input type="text" name="Title" required></div>
             
             <div>
               <label>Topics<span class="form-required">*
@@ -82,14 +82,30 @@
               </select>
             </div>
             <div><label>Upload Paper<span class="form-required">*
-            </span></label><input type="file" name="name" required></div>
+            </span></label><input type="file" name="File" required></div>
           </div>
         </div>
       </fieldset>
-      <button type="submit" href="/">Submit</button>
+      <button type="submit">Submit</button>
     </form>
     </div> 
   </body>
+  <script language="javascript" src="static/scripts/FOOTER.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
     <script language="javascript" src="static/scripts/FOOTER.js"></script>
 </html>
 
