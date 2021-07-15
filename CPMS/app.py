@@ -73,6 +73,7 @@ def RegistrationForm():
         phone = request.form.get('PhoneNumber')
         password = request.form.get('Password')
 
+        topic = request.form.getlist('Topics')
         
         author = Author.query.filter_by(EmailAddress=email).first()
         reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
@@ -196,6 +197,7 @@ def AccountSettings():
 @app.route('/authorViewForm')
 @login_required
 def authorViewForm():
+
     return render_template('authorViewForm.html',user=current_user)
 
 
@@ -231,7 +233,8 @@ def Management():
 @app.route('/PaperPage', methods=['GET', 'POST'])
 @login_required
 def PaperPage():
-    return render_template('PaperPage.html',user=current_user)
+    papers = get_papers()
+    return render_template('PaperPage.html',user=current_user, papers=papers)
 
 @app.route('/manage_author', methods=['GET', 'POST','DELETE'])
 def manage_author(x=None, y=None):
@@ -256,8 +259,6 @@ def PaperReview():
     
     paper_ids = {}
     reviewer_ids = {}
-    #fake_upload()
-    #print(reviews[0].__mapper__.attrs.keys())
     for review in reviews:
         if review.PaperID not in paper_ids:
             paper_ids[review.PaperID] = [review.ReviewerID]

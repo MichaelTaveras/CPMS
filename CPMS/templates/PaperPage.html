@@ -51,7 +51,7 @@
               </div>
         {% endif %} {% endfor %} {% endif %} {% endwith %}
     
-      {% for paper in  current_user.Papers %}
+      {% for paper in user.Papers %}
 
         {% if userType == 'author' %}
         <div class="separator">
