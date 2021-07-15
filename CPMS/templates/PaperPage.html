@@ -51,13 +51,15 @@
               </div>
         {% endif %} {% endfor %} {% endif %} {% endwith %}
     
-      {% for paper in  current_user.Papers %}
+      
 
         {% if userType == 'author' %}
+        {% for paper in  current_user.Papers %}
         <div class="separator">
           {{ paper.Title }} </br>
           {{current_user.FirstName}} {{current_user.LastName}}, Paper Topics
             </div>
+            {% endfor %}
           {% endif %}
 
           {% if userType == 'reviewer' %}
@@ -68,7 +70,7 @@
             {% endif %}
 
 
-      {% endfor %}
+      
 
     <div class="separator">
         PAPER 1 Title </br>

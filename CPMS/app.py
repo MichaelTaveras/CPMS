@@ -135,6 +135,10 @@ def paperSubmitForm():
         title = request.form.get('Title')
         file = request.files['File']
         fileName = file.filename
+
+        topics = request.form.getlist('topics')
+        print(topics)
+
     
         # file.save(file.filename)
         if len(title) > 500:
@@ -289,6 +293,15 @@ def reviewerViewForm():
 @app.route('/reviewSubmitForm')
 @login_required
 def reviewSubmitForm():
+    author = Author.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+    reviewer = Reviewer.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+  
+    if author:
+        userType = 'author'
+    elif reviewer:
+        userType = 'reviewer'
+
+
     return render_template('reviewSubmitForm.html',user=current_user)
 
 
