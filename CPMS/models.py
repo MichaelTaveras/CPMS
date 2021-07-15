@@ -130,15 +130,69 @@ class Paper(db.Model,UserMixin):
     WebandInternetProgramming = db.Column(db.Boolean)
     Other = db.Column(db.Boolean)
 
+    # returns list of active topics
+    def getActiveTopics(self):
+        topicList =  [
+    self.AnalysisOfAlgorithms,
+    self.Applications,
+    self.Architecture,
+    self.ArtificialIntelligence,
+    self.ComputerEngineering,
+    self.Curriculum,
+    self.DataStructures,
+    self.Databases,
+    self.DistanceLearning,
+    self.DistributedSystems,
+    self.EthicalSocietalIssues,
+    self.FirstYearComputing,
+    self.GenderIssues,
+    self.GrantWriting,
+    self.GraphicsImageProcessing,
+    self.HumanComputerInteration,
+    self.LaboratoryEnvironments,
+    self.Literacy,
+    self.MathematicsinComputing,
+    self.Multimedia,
+    self.NetworkingDataCommunications,
+    self.NonMajorCourses,
+    self.ObjectOrientedIssues,
+    self.OperatingSystems,
+    self.ParallelProcessing,
+    self.Pedagogy,
+    self.ProgrammingLanguages,
+    self.Research,
+    self.Security,
+    self.SoftwareEngineering,
+    self.SystemsAnalysisandDesign,
+    self.UsingTechnologyintheClassroom,
+    self.WebandInternetProgramming]
+
+        return [ x for x in topicList if x ==True]
+
 
 # model for reviews
 class Review(db.Model,UserMixin):
     # __tablename__ = 'review'
 
-    ReviewID      = db.Column(db.Integer, primary_key=True)
-    PaperID       = db.Column(db.Integer, db.ForeignKey('paper.PaperID'))
-    ReviewerID    = db.Column(db.Integer, db.ForeignKey('reviewer.ReviewerID'))
-    # columns for Review ratings
-
-    pass
+    ReviewID = db.Column(db.Integer, primary_key=True)
+    PaperID = db.Column(db.Integer, db.ForeignKey('paper.PaperID'))
+    ReviewerID = db.Column(db.Integer, db.ForeignKey('reviewer.ReviewerID'))
+    ApproTopic = db.Column(db.String(100))
+    TimeliTopic= db.Column(db.String(100))
+    SupportiveEvi = db.Column(db.String(100))
+    TechQual= db.Column(db.String(100))
+    ScopeCov = db.Column(db.String(100))
+    CitationPrevWork = db.Column(db.String(100))
+    Original = db.Column(db.String(100))
+    ConCom = db.Column(db.String(100))
+    OrganPaper = db.Column(db.String(100))
+    ClarityMess = db.Column(db.String(100))
+    Mechanics = db.Column(db.String(100))
+    WrittenCom = db.Column(db.String(100))
+    SuitPres = db.Column(db.String(100))
+    PotIntTop = db.Column(db.String(100))
+    PotOralCom = db.Column(db.String(100))
+    OverallRate= db.Column(db.String(100))
+    OverCom = db.Column(db.String(100))
+    
 

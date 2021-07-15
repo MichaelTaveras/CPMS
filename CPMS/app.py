@@ -1,6 +1,4 @@
-from operator import le
 from os import remove
-import os
 from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session, Blueprint
 import sqlalchemy
 from sqlalchemy.sql.functions import user
@@ -11,9 +9,11 @@ from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 # user=current_user  -> links current user to each template
+# @login_required -> cant access page unless user logged in
 
 app = Blueprint('app', __name__)
 
+# user login page
 @app.route('/LoginForm', methods=['GET','POST'])
 def LoginForm():
     if request.method == 'POST':
@@ -48,12 +48,12 @@ def LoginForm():
 
     return render_template('LoginForm.html')
 
-
+# forgot password page
 @app.route('/Forgot')
 def Forgot():
     return render_template('Forgot.html')
 
-
+# user registration page
 @app.route('/RegistrationForm',methods=['GET','POST'])
 def RegistrationForm():
     if request.method == 'POST':
@@ -102,6 +102,112 @@ def RegistrationForm():
                     PhoneNumber = phone,
                     Password = generate_password_hash(password, method='sha256'))
             elif userType == 'reviewer':
+                aa = False
+                app = False
+                arc = False
+                ai = False
+                ce = False
+                curr = False
+                dst = False
+                dab = False
+                dl = False
+                dsy = False
+                esi = False
+                fyc = False
+                gi = False 
+                gw = False 
+                gip = False
+                hci = False
+                labe = False
+                lit = False
+                mic = False
+                mm = False
+                ndc = False
+                nmc = False
+                ooi = False
+                ops = False
+                pp = False
+                pgg = False
+                plg = False
+                rsc = False
+                sec = False
+                swe = False
+                sad = False
+                tec = False
+                wip = False
+                oth = False
+
+                topics = request.form.getlist('topics')
+                for topic in topics:
+                    if topic == "AA":
+                        aa = True
+                    elif topic == "APP":
+                        app = True
+                    elif topic == "ARC":
+                        arc = True
+                    elif topic == "AI":
+                        ai = True
+                    elif topic == "CE":    
+                        ce = True
+                    elif topic == "CURR":
+                        curr = True
+                    elif topic == "DST":
+                        dst = True
+                    elif topic == "DB":
+                        dab = True
+                    elif topic == "DL":
+                        dl = True
+                    elif topic == "DSY":
+                        dsy = True
+                    elif topic == "ESI":
+                        esi = True
+                    elif topic == "FYC":
+                        fyc = True
+                    elif topic == "GI":
+                        gi = True
+                    elif topic == "GW":
+                        gw = True
+                    elif topic == "GIP":
+                        gip = True
+                    elif topic == "HCI":
+                        hci = True
+                    elif topic == "LE":
+                        labe = True
+                    elif topic == "LIT":
+                        lit = True
+                    elif topic == "MIC":
+                        mic = True
+                    elif topic == "MM":
+                        mm = True
+                    elif topic == "NDC":
+                        ndc = True
+                    elif topic == "NMC":
+                        nmc = True
+                    elif topic == "OOI":
+                        ooi = True
+                    elif topic == "OS":
+                        ops = True
+                    elif topic == "PP":
+                        pp = True
+                    elif topic == "PGG":
+                        pgg = True
+                    elif topic == "PLG":
+                        plg = True
+                    elif topic == "RSC":
+                        rsc = True
+                    elif topic == "SEC":
+                        sec = True
+                    elif topic == "SWE":
+                        swe = True
+                    elif topic == "SAD":
+                        sad = True
+                    elif topic == "TEC":
+                        tec = True
+                    elif topic == "WIP":
+                        wip = True
+                    elif topic == "OTH":
+                        oth  = True 
+
                 newUser = Reviewer(
                     FirstName = fname,
                     MiddleInitial = midIn,
@@ -114,8 +220,42 @@ def RegistrationForm():
                     ZipCode = zip,
                     EmailAddress = email,
                     PhoneNumber = phone,
-                    Password = generate_password_hash(password, method='sha256'))
-                    # other topics need to be added
+                    Password = generate_password_hash(password, method='sha256'),
+                    AnalysisOfAlgorithms = aa,
+                    Applications = app,
+                    Architecture = arc,
+                    ArtificialIntelligence = ai,
+                    ComputerEngineering = ce,
+                    Curriculum = curr,
+                    DataStructures = dst,
+                    Databases = dab,
+                    DistanceLearning = dl,
+                    DistributedSystems = dsy,
+                    EthicalSocietalIssues = esi,
+                    FirstYearComputing = fyc,
+                    GenderIssues = gi,
+                    GrantWriting = gw,
+                    GraphicsImageProcessing = gip,
+                    HumanComputerInteration = hci,
+                    LaboratoryEnvironments = labe,
+                    Literacy = lit,
+                    MathematicsinComputing = mic,
+                    Multimedia = mm,
+                    NetworkingDataCommunications = ndc,
+                    NonMajorCourses= nmc,
+                    ObjectOrientedIssues = ooi,
+                    OperatingSystems = ops,
+                    ParallelProcessing = pp,
+                    Pedagogy = pgg,
+                    ProgrammingLanguages = plg,
+                    Research = rsc,
+                    Security = sec,
+                    SoftwareEngineering = swe,
+                    SystemsAnalysisandDesign = sad,
+                    UsingTechnologyintheClassroom = tec,
+                    WebandInternetProgramming = wip,
+                    Other = oth)
+                    
             else:
                 print("Error on user type")
 
@@ -130,7 +270,7 @@ def RegistrationForm():
 
     return render_template('RegistrationForm.html', user=current_user)
 
-
+# paper submition page
 @app.route('/paperSubmitForm', methods=['GET', 'POST'])
 @login_required
 def paperSubmitForm():
@@ -246,7 +386,7 @@ def paperSubmitForm():
             elif topic == "OTH":
                 oth  = True 
 
-        # file.save(file.filename)
+
         if len(title) > 500:
             flash('Title is too long.', category='error')
         elif False == True:
@@ -258,7 +398,7 @@ def paperSubmitForm():
                 AuthorID=current_user.AuthorID, 
                 FileName=fileName, 
                 # FileData= file
-                AnalysisofAlgorithms = aa,
+                AnalysisOfAlgorithms = aa,
                 Applications = app,
                 Architecture = arc,
                 ArtificialIntelligence = ai,
@@ -301,17 +441,15 @@ def paperSubmitForm():
             return redirect(url_for('app.index'))
 
 
+
+
+
     return render_template('paperSubmitForm.html',user=current_user)
 
 
-# //////////////////////////////////////////////////////////////////////
-
-
-# TODO: THESE TEMPLATES NEED TO BE IMPLEMENTED WHICH USER INFO
-
-
+# user home page
 @app.route('/', methods=['GET', 'POST'])
-@login_required #cant access page unless user logged in
+@login_required 
 def index():
     # have correct things show depending on user
    
@@ -325,12 +463,75 @@ def index():
 
     return render_template('PaperPage.html', user=current_user, userType=userType)
 
-
+# user account settings
 @app.route('/AccountSettings',methods=['GET','POST'])
 @login_required
 def AccountSettings():
-    # allows user to change user info
+    if request.method == 'POST':
+        userType = request.form.get('type')
 
+        fname = request.form.get('FirstName')
+        midIn = request.form.get('MiddleInitial')
+        lname = request.form.get('LastName')
+
+        affil = request.form.get('Affiliation')
+        dep = request.form.get('Department')
+        
+        address = request.form.get('Address')
+        city = request.form.get('City')
+        state = request.form.get('State')
+        zip = request.form.get('Zip')
+
+        email = request.form.get('EmailAddress')
+        phone = request.form.get('PhoneNumber')
+        password = request.form.get('Password')
+
+        topic = request.form.getlist('Topics')
+        
+        author = Author.query.filter_by(EmailAddress=email).first()
+        reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
+
+        if len(email) < 5:
+            flash('Email must be greater than 5 characters.', category='error')
+        elif len(password) != 5:
+            flash('Password must be 5 characters.', category='error')
+        else:
+            if userType == 'author':
+                author.FirstName = fname,
+                author.MiddleInitial = midIn,
+                author.LastName = lname,
+                author.Affiliation = affil,
+                author.Department = dep,
+                author.Address = address,
+                author.City = city,
+                author.State = state,
+                author.ZipCode = zip,
+                author.EmailAddress = email,
+                author.PhoneNumber = phone,
+
+            elif userType == 'reviewer':
+                reviewer.FirstName = fname,
+                reviewer.MiddleInitial = midIn,
+                reviewer.LastName = lname,
+                reviewer.Affiliation = affil,
+                reviewer.Department = dep,
+                reviewer.Address = address,
+                reviewer.City = city,
+                reviewer.State = state,
+                reviewer.ZipCode = zip,
+                reviewer.EmailAddress = email,
+                reviewer.PhoneNumber = phone,
+                # 
+            else:
+                print("Error on user type")
+
+            # to database
+            db.session.commit()
+            flash('Account Updated!', category='success')
+
+            return redirect(url_for('app.index'))
+            
+    
     return render_template('AccountSettings.html', user=current_user)
 
 
@@ -340,25 +541,15 @@ def authorViewForm():
 
     return render_template('authorViewForm.html',user=current_user)
 
-
+# user log out functionality
 @app.route('/logout')
 @login_required #cant access page unless user logged in
 def LogOut():
     logout_user()
     return redirect(url_for('app.LoginForm'))
 
-def get_authors():
-    return Author.query.all()
-    
-def get_reviewers():
-    return Reviewer.query.all()
 
-def get_reviews():
-    return Review.query.all()
-
-def get_papers():
-    return Paper.query.all()
-
+# admin page
 @app.route('/Management', methods=['GET'])
 @login_required
 def Management():
@@ -370,12 +561,7 @@ def Management():
     
     return render_template('Management.html',user=current_user, authors=authors, reviewers=reviewers, reviews=reviews, papers=papers)
 
-@app.route('/PaperPage', methods=['GET', 'POST'])
-@login_required
-def PaperPage():
-    papers = get_papers()
-    return render_template('PaperPage.html',user=current_user, papers=papers)
-
+# admin author info edit
 @app.route('/manage_author', methods=['GET', 'POST','DELETE'])
 def manage_author(x=None, y=None):
     # do something to send email
@@ -391,6 +577,7 @@ def manage_author(x=None, y=None):
     
     return render_template('Management.html',user=current_user, authors=authors)
 
+# admin paper to review page
 @app.route('/PaperReview')
 @login_required
 def PaperReview():
@@ -420,7 +607,7 @@ def PaperReview():
 
     return render_template('PaperReview.html',user=current_user, reviews=output, reviewers=reviewers)
 
-
+# allows user to choose view
 @app.route('/reviewerViewForm')
 @login_required
 def reviewerViewForm():
@@ -430,86 +617,152 @@ def reviewerViewForm():
 @app.route('/reviewSubmitForm')
 @login_required
 def reviewSubmitForm():
+    author = Author.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+    reviewer = Reviewer.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+  
+    if author:
+        userType = 'author'
+    elif reviewer:
+        userType = 'reviewer'
+
+
     return render_template('reviewSubmitForm.html',user=current_user)
 
 
 @app.route('/viewForm')
 @login_required
 def viewForm():
-    return render_template('viewForm.html',user=current_user)
+    author = Author.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+    reviewer = Reviewer.query.filter_by(EmailAddress=current_user.EmailAddress).first()
+  
+    if author:
+        userType = 'author'
+    elif reviewer:
+        userType = 'reviewer'
 
+    return render_template('viewForm.html',user=current_user, userType=userType)
+
+# review submition form
 @app.route('/ReviewForm', methods=['GET','POST'])
 @login_required
 def ReviewForm():
     if request.method == 'POST':
-        userType = request.form.get('type')
+            userType = request.form.get('type')
 
-        fname = request.form.get('FirstName')
-        midIn = request.form.get('MiddleInitial')
-        lname = request.form.get('LastName')
+            fname = request.form.get('FirstName')
+            midIn = request.form.get('MiddleInitial')
+            lname = request.form.get('LastName')
 
-        PaperT = request.form.get('PaperTitle')#Paper title
-        
-        ApproTopic = request.form.get('AoT')
-        TimeliTopic = request.form.get('ToT')
-        SupportiveEvi = request.form.get('SE')
-        TechQual = request.form.get('TQ')
-        ScopeCov = request.form.get('SoC')
-        CitationPrevWork = request.form.get('CPV')
-        Original = request.form.get('Orig')
-        ConCom = request.form.get('CC')
-        
-        OrganPaper = request.form.get('OoP')
-        ClarityMess = request.form.get('CMM')
-        Mechanics = request.form.get('mech')
-        WrittenCom = request.form.get('WDC')
-        
-        
-        SuitPres = request.form.get('SfP')
-        PotIntTop = request.form.get('PIT')
-        PotOralCom = request.form.get('POPC')
-        
-        OverallRate = request.form.get('OverRate')
-        OverCom = request.form.get('ORC')
-       
-        author = Author.query.filter_by(EmailAddress=email).first()
-        reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
+            PaperT = request.form.get('PaperTitle')#Paper title
 
+            
+            paper = Paper.query.filter_by(Title=PaperT).first()
+            
+            ApproTopic = request.form.get('AoT')
+            TimeliTopic = request.form.get('ToT')
+            SupportiveEvi = request.form.get('SE')
+            TechQual = request.form.get('TQ')
+            ScopeCov = request.form.get('SoC')
+            CitationPrevWork = request.form.get('CPV')
+            Original = request.form.get('Orig')
+            ConCom = request.form.get('CC')
+            
+            OrganPaper = request.form.get('OoP')
+            ClarityMess = request.form.get('CMM')
+            Mechanics = request.form.get('mech')
+            WrittenCom = request.form.get('WDC')
+            
+            
+            SuitPres = request.form.get('SfP')
+            PotIntTop = request.form.get('PIT')
+            PotOralCom = request.form.get('POPC')
+            
+            OverallRate = request.form.get('OverRate')
+            OverCom = request.form.get('ORC')
+        
+            newReview = Review(
+            # PaperID = paper.PaperID,
+            ReviewerID=current_user.ReviewerID, 
+            ApproTopic = ApproTopic,
+            TimeliTopic = TimeliTopic,
+            SupportiveEvi = SupportiveEvi,
+            TechQual = TechQual,
+            ScopeCov = ScopeCov,
+            CitationPrevWork = CitationPrevWork,
+            Original = Original,
+            ConCom = ConCom,
+            
+            OrganPaper = OrganPaper,
+            ClarityMess = ClarityMess,
+            Mechanics = Mechanics,
+            WrittenCom = WrittenCom,
+            
+            SuitPres = SuitPres,
+            PotIntTop = PotIntTop,
+            PotOralCom = PotOralCom,
+            
+            OverallRate = OverallRate,
+            OverCom = OverCom
+            )
 
-     # to database
-        db.session.add(newReview)#make new review variable
-        db.session.commit()
+        # to database
+            db.session.add(newReview)#make new review variable
+            db.session.commit()
 
-        flash('Review Submitted', category='success')
-        return redirect(url_for('app.index'))
+            flash('Review Submitted', category='success')
+            return redirect(url_for('app.index'))
     return render_template('ReviewForm.html', user=current_user)
 
+# @app.route('/PaperPage', methods=['GET', 'POST'])
+# @login_required
+# def PaperPage():
+#     papers = get_papers()
+#     return render_template('PaperPage.html',user=current_user, papers=papers)
 
+# allows for fake up to db
 def fake_upload():
+    paper_1 = Paper(AuthorID=1, FileName="paper one", Title="paper title")
     
-    #paper_1 = Paper(AuthorID=1, FileName="paper one", Title="paper title")
-    
-    # reviewerID = Reviewer.query.all()[0].ReviewerID
-    # print(reviewerID)
+    reviewerID = Reviewer.query.all()[0].ReviewerID
+    print(reviewerID)
 
     
-    # papers = Paper.query.all()
-    # for paper in papers:
-    #     print(paper.PaperID)
-    # review_1 = Review(PaperID=1, ReviewerID=1)
-    # review_2 = Review(PaperID=2, ReviewerID=1)
-    # review_3 = Review(PaperID=3, ReviewerID=1)
+    papers = Paper.query.all()
+    for paper in papers:
+        print(paper.PaperID)
+    review_1 = Review(PaperID=1, ReviewerID=1)
+    review_2 = Review(PaperID=2, ReviewerID=1)
+    review_3 = Review(PaperID=3, ReviewerID=1)
 
-    # db.session.add(review_1)
-    # db.session.add(review_2)
-    # db.session.add(review_3)
+    db.session.add(review_1)
+    db.session.add(review_2)
+    db.session.add(review_3)
 
-    # db.session.commit()
+    db.session.commit()
 
     print(Review.query.all())
 
     
     
     #print(Paper.query.all())
-    
 
+# returns all authors
+def get_authors():
+    return Author.query.all()
+    
+# returns all authors   
+def get_reviewers():
+    return Reviewer.query.all()
+
+# returns all reviews
+def get_reviews():
+    return Review.query.all()
+
+# returns all papers
+def get_papers():
+    return Paper.query.all()
+
+# TODO:
+# account settings update
+# link papers to review
+# review form page access

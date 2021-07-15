@@ -51,57 +51,37 @@
               </div>
         {% endif %} {% endfor %} {% endif %} {% endwith %}
     
-      {% for paper in user.Papers %}
+      
 
         {% if userType == 'author' %}
+        {% for paper in current_user.Papers %}
         <div class="separator">
           {{ paper.Title }} </br>
-          {{current_user.FirstName}} {{current_user.LastName}}, Paper Topics
+          {{current_user.FirstName}} {{current_user.LastName}}, 
+          <!-- {% for topic in paper.getActiveTopics() %}
+            {{topic}},
+
+            {% endfor %} -->
+
+
             </div>
+            {% endfor %}
           {% endif %}
 
           {% if userType == 'reviewer' %}
-          <div class="separator">
-            paper.Title </br>
-            Author, Paper Topics
-              </div>
-            {% endif %}
+            {% for review in current_user.Reviews %}
+            <div class="separator">
+            
+            {{current_user.FirstName}} {{current_user.LastName}}, 
+              
+            </div>
+            {% endfor %}
+          {% endif %}
 
 
-      {% endfor %}
+      
 
-    <div class="separator">
-        PAPER 1 Title </br>
-        Author, Paper Topics
-    </div>
-
-    <div class="separator" style="padding: 25px">
-        REVIEW 1 </br> 
-        <p style="padding: 10px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit 
-        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-        occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.
-        </p>
-    </div>
-
-    <div class="separator" style="padding: 25px">
-        REVIEW 2 </br> 
-        <p style="padding: 10px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit 
-        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-        occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.
-        </p>
-    </div>
+    
 
 </body>
   <script language="javascript" src="static/scripts/FOOTER.js"></script>
