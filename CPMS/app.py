@@ -460,6 +460,9 @@ def ReviewForm():
             lname = request.form.get('LastName')
 
             PaperT = request.form.get('PaperTitle')#Paper title
+
+            
+            paper = Paper.query.filter_by(Title=PaperT).first()
             
             ApproTopic = request.form.get('AoT')
             TimeliTopic = request.form.get('ToT')
@@ -483,9 +486,30 @@ def ReviewForm():
             OverallRate = request.form.get('OverRate')
             OverCom = request.form.get('ORC')
         
-            author = Author.query.filter_by(EmailAddress=email).first()
-            reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
-
+            newReview = Review(
+            # PaperID = paper.PaperID,
+            ReviewerID=current_user.ReviewerID, 
+            ApproTopic = ApproTopic,
+            TimeliTopic = TimeliTopic,
+            SupportiveEvi = SupportiveEvi,
+            TechQual = TechQual,
+            ScopeCov = ScopeCov,
+            CitationPrevWork = CitationPrevWork,
+            Original = Original,
+            ConCom = ConCom,
+            
+            OrganPaper = OrganPaper,
+            ClarityMess = ClarityMess,
+            Mechanics = Mechanics,
+            WrittenCom = WrittenCom,
+            
+            SuitPres = SuitPres,
+            PotIntTop = PotIntTop,
+            PotOralCom = PotOralCom,
+            
+            OverallRate = OverallRate,
+            OverCom = OverCom
+            )
 
         # to database
             db.session.add(newReview)#make new review variable
@@ -524,3 +548,7 @@ def fake_upload():
     #print(Paper.query.all())
     
 
+# TODO:
+# account settings update
+# link papers to review
+# review form page access

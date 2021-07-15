@@ -173,10 +173,25 @@ class Paper(db.Model,UserMixin):
 class Review(db.Model,UserMixin):
     # __tablename__ = 'review'
 
-    ReviewID      = db.Column(db.Integer, primary_key=True)
-    PaperID       = db.Column(db.Integer, db.ForeignKey('paper.PaperID'))
-    ReviewerID    = db.Column(db.Integer, db.ForeignKey('reviewer.ReviewerID'))
-    # columns for Review ratings
-
-    pass
+    ReviewID = db.Column(db.Integer, primary_key=True)
+    PaperID = db.Column(db.Integer, db.ForeignKey('paper.PaperID'))
+    ReviewerID = db.Column(db.Integer, db.ForeignKey('reviewer.ReviewerID'))
+    ApproTopic = db.Column(db.String(100))
+    TimeliTopic= db.Column(db.String(100))
+    SupportiveEvi = db.Column(db.String(100))
+    TechQual= db.Column(db.String(100))
+    ScopeCov = db.Column(db.String(100))
+    CitationPrevWork = db.Column(db.String(100))
+    Original = db.Column(db.String(100))
+    ConCom = db.Column(db.String(100))
+    OrganPaper = db.Column(db.String(100))
+    ClarityMess = db.Column(db.String(100))
+    Mechanics = db.Column(db.String(100))
+    WrittenCom = db.Column(db.String(100))
+    SuitPres = db.Column(db.String(100))
+    PotIntTop = db.Column(db.String(100))
+    PotOralCom = db.Column(db.String(100))
+    OverallRate= db.Column(db.String(100))
+    OverCom = db.Column(db.String(100))
+    
 
