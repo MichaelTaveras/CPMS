@@ -446,7 +446,54 @@ def reviewSubmitForm():
 @app.route('/viewForm')
 @login_required
 def viewForm():
+
     return render_template('viewForm.html',user=current_user)
+
+@app.route('/ReviewForm', methods=['GET','POST'])
+@login_required
+def ReviewForm():
+    if request.method == 'POST':
+            userType = request.form.get('type')
+
+            fname = request.form.get('FirstName')
+            midIn = request.form.get('MiddleInitial')
+            lname = request.form.get('LastName')
+
+            PaperT = request.form.get('PaperTitle')#Paper title
+            
+            ApproTopic = request.form.get('AoT')
+            TimeliTopic = request.form.get('ToT')
+            SupportiveEvi = request.form.get('SE')
+            TechQual = request.form.get('TQ')
+            ScopeCov = request.form.get('SoC')
+            CitationPrevWork = request.form.get('CPV')
+            Original = request.form.get('Orig')
+            ConCom = request.form.get('CC')
+            
+            OrganPaper = request.form.get('OoP')
+            ClarityMess = request.form.get('CMM')
+            Mechanics = request.form.get('mech')
+            WrittenCom = request.form.get('WDC')
+            
+            
+            SuitPres = request.form.get('SfP')
+            PotIntTop = request.form.get('PIT')
+            PotOralCom = request.form.get('POPC')
+            
+            OverallRate = request.form.get('OverRate')
+            OverCom = request.form.get('ORC')
+        
+            author = Author.query.filter_by(EmailAddress=email).first()
+            reviewer = Reviewer.query.filter_by(EmailAddress=email).first()
+
+
+        # to database
+            db.session.add(newReview)#make new review variable
+            db.session.commit()
+
+            flash('Review Submitted', category='success')
+            return redirect(url_for('app.index'))
+    return render_template('ReviewForm.html', user=current_user)
 
 
 def fake_upload():
