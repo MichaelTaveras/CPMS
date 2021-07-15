@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from os import path
 
 db = SQLAlchemy()
+
 DB_NAME = 'database.db'
 
 def create_app():

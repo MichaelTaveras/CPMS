@@ -3,13 +3,12 @@ from flask import Flask, render_template, request, send_from_directory, url_for,
 import sqlalchemy
 from sqlalchemy.sql.functions import user
 from sqlalchemy.inspection import inspect
-from .models import Author, Reviewer, Paper
+from .models import Author, Review, Reviewer, Paper
 from werkzeug.security import generate_password_hash, check_password_hash # hides password
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 # user=current_user  -> links current user to each template
-
 
 app = Blueprint('app', __name__)
 
@@ -206,21 +205,79 @@ def LogOut():
     logout_user()
     return redirect(url_for('app.LoginForm'))
 
-@app.route('/Management')
+def get_authors():
+    return Author.query.all()
+    
+def get_reviewers():
+    return Reviewer.query.all()
+
+def get_reviews():
+    return Review.query.all()
+
+def get_papers():
+    return Paper.query.all()
+
+@app.route('/Management', methods=['GET'])
 @login_required
 def Management():
-    return render_template('Management.html',user=current_user)
+    print("all authors")
+    authors = get_authors()
+    reviewers = get_reviewers()
+    reviews = get_reviews()
+    papers = get_papers()
+    
+    return render_template('Management.html',user=current_user, authors=authors, reviewers=reviewers, reviews=reviews, papers=papers)
 
-# @app.route('/PaperPage')
-# @login_required
-# def PaperPage():
+@app.route('/PaperPage', methods=['GET', 'POST'])
+@login_required
+def PaperPage():
+    return render_template('PaperPage.html',user=current_user)
 
-#     return render_template('PaperPage.html',user=current_user)
+@app.route('/manage_author', methods=['GET', 'POST','DELETE'])
+def manage_author(x=None, y=None):
+    # do something to send email
+    print(request.values)
+    if "delete" in request.form:
+        print("delete got called")
+        # author = Author(authorID)
+        # db.session.delete(author)
+        # db.session.commit()
+    elif "edit" in request.form:
+        print("edit got called")
+    authors = get_authors()
+    
+    return render_template('Management.html',user=current_user, authors=authors)
 
 @app.route('/PaperReview')
 @login_required
 def PaperReview():
-    return render_template('PaperReview.html',user=current_user)
+    reviews = get_reviews()
+    reviewers = get_reviewers()
+    
+    paper_ids = {}
+    reviewer_ids = {}
+    #fake_upload()
+    #print(reviews[0].__mapper__.attrs.keys())
+    for review in reviews:
+        if review.PaperID not in paper_ids:
+            paper_ids[review.PaperID] = [review.ReviewerID]
+        else:
+            paper_ids[review.PaperID].append(review.ReviewerID)
+    
+    output = {}
+    for key, value in paper_ids.items():
+        paper = Paper.query.filter_by(PaperID=key).first()
+        paper_display_key = paper.Title + " " + str(paper.PaperID)
+        
+        for reviewer_id in value:
+            reviewer = Reviewer.query.filter_by(ReviewerID=reviewer_id).first()
+            if paper_display_key not in output:
+                output[paper_display_key] = reviewer.FirstName + " " + reviewer.LastName
+            else:
+                output[paper_display_key] += ", " + reviewer.FirstName + " " + reviewer.LastName
+
+
+    return render_template('PaperReview.html',user=current_user, reviews=output, reviewers=reviewers)
 
 
 @app.route('/reviewerViewForm')
@@ -241,4 +298,31 @@ def viewForm():
     return render_template('viewForm.html',user=current_user)
 
 
+def fake_upload():
+    
+    #paper_1 = Paper(AuthorID=1, FileName="paper one", Title="paper title")
+    
+    # reviewerID = Reviewer.query.all()[0].ReviewerID
+    # print(reviewerID)
+
+    
+    # papers = Paper.query.all()
+    # for paper in papers:
+    #     print(paper.PaperID)
+    # review_1 = Review(PaperID=1, ReviewerID=1)
+    # review_2 = Review(PaperID=2, ReviewerID=1)
+    # review_3 = Review(PaperID=3, ReviewerID=1)
+
+    # db.session.add(review_1)
+    # db.session.add(review_2)
+    # db.session.add(review_3)
+
+    # db.session.commit()
+
+    print(Review.query.all())
+
+    
+    
+    #print(Paper.query.all())
+    
 

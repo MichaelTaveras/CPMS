@@ -75,3 +75,4 @@ class Review(db.Model,UserMixin):
     # columns for Review ratings
 
     pass
+
