@@ -6,6 +6,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		<link rel="stylesheet" href="static/styles/stylesAccSettings.css">
+      <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
     <style>
     </style>
   </head>
@@ -18,6 +29,25 @@
       <div class="banner">
         <h1>Account Settings</h1>
       </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} 
+      {% if messages %} 
+        {% for category, message in messages %} 
+          {% if category =='error' %}
+            <div class="alert alert-danger alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
 
       <div class="colums">
 
@@ -53,7 +83,7 @@
         </div>
         <div class="item">
      <label for="Zip">Zip/Postal Code<span>*</span></label>
-     <input id="Zip" type="text" name="Zip" value={{user.Zip}}>
+     <input id="Zip" type="text" name="Zip" value={{user.ZipCode}}>
         </div>
         <div class="item">
      <label for="City">City<span>*</span></label>
@@ -76,6 +106,7 @@
 
 <!-- only show if reviewer -->
 <!-- Topics -->
+{% if userType == 'reviewer'%}
 <h2>Review Topics</h2>
 <label for="topics">Please indicate the topics in which you are knowledable and/or interested. (Note: If you've reviews in the past, you will still need to provide this information as interests do change.) <br>Please select one or more topics. Please type your topic if not listed here: </br>
 </label>
@@ -117,11 +148,27 @@
 </select>
 <br>For windows: Hold down the control (ctrl) button to select or deselect multiple options
 <br>For Mac: Hold down the command button to select or deselect multiple options
+{%endif%}
    <div class="btn-block">
-     <button type="submit" href="/">Save Changes</button>
+     <button type="submit">Save Changes</button>
    </div>
    <script language="javascript" src="static/scripts/FOOTER.js"></script>
  </form>
     </div>
   </body>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
 </html>

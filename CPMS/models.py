@@ -128,8 +128,9 @@ class Paper(db.Model,UserMixin):
     SystemsAnalysisandDesign = db.Column(db.Boolean)
     UsingTechnologyintheClassroom = db.Column(db.Boolean)
     WebandInternetProgramming = db.Column(db.Boolean)
+    Other = db.Column(db.Boolean)
 
-
+    # returns list of active topics
     def getActiveTopics(self):
         topicList =  [
     self.AnalysisOfAlgorithms,

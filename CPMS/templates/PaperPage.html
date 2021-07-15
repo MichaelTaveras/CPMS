@@ -58,10 +58,12 @@
         <div class="separator">
           {{ paper.Title }} </br>
           {{current_user.FirstName}} {{current_user.LastName}}, 
-          {% for topic in paper.getActiveTopics() %}
+          <!-- {% for topic in paper.getActiveTopics() %}
             {{topic}},
 
-            {% endfor %}
+            {% endfor %} -->
+
+
             </div>
             {% endfor %}
           {% endif %}
@@ -71,7 +73,7 @@
             <div class="separator">
             
             {{current_user.FirstName}} {{current_user.LastName}}, 
-              {{review.ApproTopic}}
+              
             </div>
             {% endfor %}
           {% endif %}
