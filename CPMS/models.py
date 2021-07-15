@@ -44,7 +44,39 @@ class Reviewer(db.Model, UserMixin):
     EmailAddress    = db.Column(db.String(100), unique=True)
     Password        = db.Column(db.String(5))
     Reviews         = db.relationship('Review')
-    # bits for topics
+    AnalysisOfAlgorithms = db.Column(db.Boolean)
+    Applications = db.Column(db.Boolean)
+    Architecture = db.Column(db.Boolean)
+    ArtificialIntelligence = db.Column(db.Boolean)
+    ComputerEngineering = db.Column(db.Boolean)
+    Curriculum = db.Column(db.Boolean)
+    DataStructures = db.Column(db.Boolean)
+    Databases = db.Column(db.Boolean)
+    DistanceLearning = db.Column(db.Boolean)
+    DistributedSystems = db.Column(db.Boolean)
+    EthicalSocietalIssues = db.Column(db.Boolean)
+    FirstYearComputing = db.Column(db.Boolean)
+    GenderIssues = db.Column(db.Boolean)
+    GrantWriting = db.Column(db.Boolean)
+    GraphicsImageProcessing = db.Column(db.Boolean)
+    HumanComputerInteration = db.Column(db.Boolean)
+    LaboratoryEnvironments = db.Column(db.Boolean)
+    Literacy = db.Column(db.Boolean)
+    MathematicsinComputing = db.Column(db.Boolean)
+    Multimedia = db.Column(db.Boolean)
+    NetworkingDataCommunications = db.Column(db.Boolean)
+    NonMajorCourses = db.Column(db.Boolean)
+    ObjectOrientedIssues = db.Column(db.Boolean)
+    OperatingSystems = db.Column(db.Boolean)
+    ParallelProcessing = db.Column(db.Boolean)
+    Pedagogy = db.Column(db.Boolean)
+    ProgrammingLanguages = db.Column(db.Boolean)
+    Research = db.Column(db.Boolean)
+    Security = db.Column(db.Boolean)
+    SoftwareEngineering = db.Column(db.Boolean)
+    SystemsAnalysisandDesign = db.Column(db.Boolean)
+    UsingTechnologyintheClassroom = db.Column(db.Boolean)
+    WebandInternetProgramming = db.Column(db.Boolean)
 
      # uses reviewerID for getting ID
     def get_id(self):
@@ -57,12 +89,84 @@ class Paper(db.Model,UserMixin):
 
     PaperID       = db.Column(db.Integer, primary_key=True)
     AuthorID      = db.Column(db.Integer, db.ForeignKey('author.AuthorID'))
-    Active        = db.Column(db.LargeBinary(1))
+    Active        = db.Column(db.Boolean)
     FileName      = db.Column(db.String(100))
     FileData      = db.Column(db.LargeBinary)
     Title         = db.Column(db.String(500))
     Certification = db.Column(db.String(3))
-    # bits for topics
+
+    AnalysisOfAlgorithms = db.Column(db.Boolean)
+    Applications = db.Column(db.Boolean)
+    Architecture = db.Column(db.Boolean)
+    ArtificialIntelligence = db.Column(db.Boolean)
+    ComputerEngineering = db.Column(db.Boolean)
+    Curriculum = db.Column(db.Boolean)
+    DataStructures = db.Column(db.Boolean)
+    Databases = db.Column(db.Boolean)
+    DistanceLearning = db.Column(db.Boolean)
+    DistributedSystems = db.Column(db.Boolean)
+    EthicalSocietalIssues = db.Column(db.Boolean)
+    FirstYearComputing = db.Column(db.Boolean)
+    GenderIssues = db.Column(db.Boolean)
+    GrantWriting = db.Column(db.Boolean)
+    GraphicsImageProcessing = db.Column(db.Boolean)
+    HumanComputerInteration = db.Column(db.Boolean)
+    LaboratoryEnvironments = db.Column(db.Boolean)
+    Literacy = db.Column(db.Boolean)
+    MathematicsinComputing = db.Column(db.Boolean)
+    Multimedia = db.Column(db.Boolean)
+    NetworkingDataCommunications = db.Column(db.Boolean)
+    NonMajorCourses = db.Column(db.Boolean)
+    ObjectOrientedIssues = db.Column(db.Boolean)
+    OperatingSystems = db.Column(db.Boolean)
+    ParallelProcessing = db.Column(db.Boolean)
+    Pedagogy = db.Column(db.Boolean)
+    ProgrammingLanguages = db.Column(db.Boolean)
+    Research = db.Column(db.Boolean)
+    Security = db.Column(db.Boolean)
+    SoftwareEngineering = db.Column(db.Boolean)
+    SystemsAnalysisandDesign = db.Column(db.Boolean)
+    UsingTechnologyintheClassroom = db.Column(db.Boolean)
+    WebandInternetProgramming = db.Column(db.Boolean)
+
+
+    def getActiveTopics(self):
+        topicList =  [
+    self.AnalysisOfAlgorithms,
+    self.Applications,
+    self.Architecture,
+    self.ArtificialIntelligence,
+    self.ComputerEngineering,
+    self.Curriculum,
+    self.DataStructures,
+    self.Databases,
+    self.DistanceLearning,
+    self.DistributedSystems,
+    self.EthicalSocietalIssues,
+    self.FirstYearComputing,
+    self.GenderIssues,
+    self.GrantWriting,
+    self.GraphicsImageProcessing,
+    self.HumanComputerInteration,
+    self.LaboratoryEnvironments,
+    self.Literacy,
+    self.MathematicsinComputing,
+    self.Multimedia,
+    self.NetworkingDataCommunications,
+    self.NonMajorCourses,
+    self.ObjectOrientedIssues,
+    self.OperatingSystems,
+    self.ParallelProcessing,
+    self.Pedagogy,
+    self.ProgrammingLanguages,
+    self.Research,
+    self.Security,
+    self.SoftwareEngineering,
+    self.SystemsAnalysisandDesign,
+    self.UsingTechnologyintheClassroom,
+    self.WebandInternetProgramming]
+
+        return [ x for x in topicList if x ==True]
 
 
 # model for reviews

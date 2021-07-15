@@ -54,10 +54,14 @@
       
 
         {% if userType == 'author' %}
-        {% for paper in  current_user.Papers %}
+        {% for paper in current_user.Papers %}
         <div class="separator">
           {{ paper.Title }} </br>
-          {{current_user.FirstName}} {{current_user.LastName}}, Paper Topics
+          {{current_user.FirstName}} {{current_user.LastName}}, 
+          {% for topic in paper.getActiveTopics() %}
+            {{topic}},
+
+            {% endfor %}
             </div>
             {% endfor %}
           {% endif %}

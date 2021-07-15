@@ -23,25 +23,30 @@
          <div class="question">
          <label>View:</label>
             <div class="question-answer">
+               {% if userType == "author" %}
+
                <div>
                <input type="radio" value="none" id="radio_1" name="type"/>
-               <label for="radio_1" class="radio"><span>Past paper submissions (Authors only)</span></label>
+               <label for="radio_1" class="radio"><span>Past paper submissions</span></label>
                </div>
 
                <div>
                <input  type="radio" value="none" id="radio_2" name="type"/>
-               <label for="radio_2" class="radio"><span>Paper results (Authors only)</span></label>
+               <label for="radio_2" class="radio"><span>Paper results</span></label>
                </div>
+               {% endif %}
 
+               {% if userType == "reviewer" %}
                <div>
                <input  type="radio" value="none" id="radio_3" name="type"/>
-               <label for="radio_3" class="radio"><span>Past review submissions (Reviewers only)</span></label>
+               <label for="radio_3" class="radio"><span>Past review submissions</span></label>
                </div>
 
                <div>
                <input  type="radio" value="none" id="radio_4" name="type"/>
-               <label for="radio_4" class="radio"><span>Reviews still needed (Reviewers only)</span></label>
+               <label for="radio_4" class="radio"><span>Reviews still needed</span></label>
                </div>
+               {% endif %}
             </div>
          </div>
 
