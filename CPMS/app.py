@@ -32,14 +32,14 @@ def LoginForm():
         if author:
             if check_password_hash(author.Password, password):
                  flash('You have been successfully logged in.', category='succes')
-                 login_user(author, remember=remember)
+                 login_user(author, remember=False)
                  return redirect(url_for('app.index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
         elif reviewer:
             if check_password_hash(reviewer.Password, password):
                  flash('You have been successfully logged in.', category='succes')
-                 login_user(reviewer, remember=remember)
+                 login_user(reviewer, remember=False)
                  return redirect(url_for('app.index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
@@ -262,7 +262,7 @@ def RegistrationForm():
             # to database
             db.session.add(newUser)
             db.session.commit()
-            login_user(newUser, remember=True)
+            login_user(newUser, remember=False)
             flash('Account created!', category='success')
 
             return redirect(url_for('app.index'))
@@ -524,6 +524,7 @@ def AccountSettings():
                 # 
             else:
                 print("Error on user type")
+
 
             # to database
             db.session.commit()
