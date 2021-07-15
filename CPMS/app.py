@@ -436,43 +436,4 @@ def reviewSubmitForm():
 @app.route('/viewForm')
 @login_required
 def viewForm():
-<<<<<<< HEAD
     return render_template('viewForm.html',user=current_user)
-=======
-    return render_template('viewForm.html',user=current_user)
-
-@app.route('/ReviewForm')
-@login_required
-def ReviewForm():
-    return render_template('ReviewForm.html', user=current_user)
-
-
-def fake_upload():
-    
-    #paper_1 = Paper(AuthorID=1, FileName="paper one", Title="paper title")
-    
-    # reviewerID = Reviewer.query.all()[0].ReviewerID
-    # print(reviewerID)
-
-    
-    # papers = Paper.query.all()
-    # for paper in papers:
-    #     print(paper.PaperID)
-    # review_1 = Review(PaperID=1, ReviewerID=1)
-    # review_2 = Review(PaperID=2, ReviewerID=1)
-    # review_3 = Review(PaperID=3, ReviewerID=1)
-
-    # db.session.add(review_1)
-    # db.session.add(review_2)
-    # db.session.add(review_3)
-
-    # db.session.commit()
-
-    print(Review.query.all())
-
-    
-    
-    #print(Paper.query.all())
-    
-
->>>>>>> 89208e0a027734efa4c207d1ba75ae5d6618c737
