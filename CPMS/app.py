@@ -135,21 +135,115 @@ def paperSubmitForm():
     if request.method == 'POST':
         title = request.form.get('Title')
         file = request.files['File']
-
-        if file.filename != '':
-            file.save(file.filename)
-
         fileName = file.filename
 
+        aa = False
+        app = False
+        arc = False
+        ai = False
+        ce = False
+        curr = False
+        dst = False
+        dab = False
+        dl = False
+        dsy = False
+        esi = False
+        fyc = False
+        gi = False 
+        gw = False 
+        gip = False
+        hci = False
+        labe = False
+        lit = False
+        mic = False
+        mm = False
+        ndc = False
+        nmc = False
+        ooi = False
+        ops = False
+        pp = False
+        pgg = False
+        plg = False
+        rsc = False
+        sec = False
+        swe = False
+        sad = False
+        tec = False
+        wip = False
+        oth = False
+
+
         topics = request.form.getlist('topics')
-
-        aa =  False
-
         for topic in topics:
             if topic == "AA":
                 aa = True
+            elif topic == "APP":
+                app = True
+            elif topic == "ARC":
+                arc = True
+            elif topic == "AI":
+                ai = True
+            elif topic == "CE":    
+                ce = True
+            elif topic == "CURR":
+                curr = True
+            elif topic == "DST":
+                dst = True
+            elif topic == "DB":
+                dab = True
+            elif topic == "DL":
+                dl = True
+            elif topic == "DSY":
+                dsy = True
+            elif topic == "ESI":
+                esi = True
+            elif topic == "FYC":
+                fyc = True
+            elif topic == "GI":
+                gi = True
+            elif topic == "GW":
+                gw = True
+            elif topic == "GIP":
+                gip = True
+            elif topic == "HCI":
+                hci = True
+            elif topic == "LE":
+                labe = True
+            elif topic == "LIT":
+                lit = True
+            elif topic == "MIC":
+                mic = True
+            elif topic == "MM":
+                mm = True
+            elif topic == "NDC":
+                ndc = True
+            elif topic == "NMC":
+                nmc = True
+            elif topic == "OOI":
+                ooi = True
+            elif topic == "OS":
+                ops = True
+            elif topic == "PP":
+                pp = True
+            elif topic == "PGG":
+                pgg = True
+            elif topic == "PLG":
+                plg = True
+            elif topic == "RSC":
+                rsc = True
+            elif topic == "SEC":
+                sec = True
+            elif topic == "SWE":
+                swe = True
+            elif topic == "SAD":
+                sad = True
+            elif topic == "TEC":
+                tec = True
+            elif topic == "WIP":
+                wip = True
+            elif topic == "OTH":
+                oth  = True 
 
-    
         # file.save(file.filename)
         if len(title) > 500:
             flash('Title is too long.', category='error')
@@ -161,7 +255,41 @@ def paperSubmitForm():
                 Title=title, 
                 AuthorID=current_user.AuthorID, 
                 FileName=fileName, 
-                FileData = file
+                # FileData= file
+                AnalysisofAlgorithms = aa,
+                Applications = app,
+                Architecture = arc,
+                ArtificialIntelligence = ai,
+                ComputerEngineering = ce,
+                Curriculum = curr,
+                DataStructures = dst,
+                Databases = dab,
+                DistanceLearning = dl,
+                DistributedSystems = dsy,
+                EthicalSocietalIssues = esi,
+                FirstYearComputing = fyc,
+                GenderIssues = gi,
+                GrantWriting = gw,
+                GraphicsImageProcessing = gip,
+                HumanComputerInteration = hci,
+                LaboratoryEnvironments = labe,
+                Literacy = lit,
+                MathematicsinComputing = mic,
+                Multimedia = mm,
+                NetworkingDataCommunications = ndc,
+                NonMajorCourses= nmc,
+                ObjectOrientedIssues = ooi,
+                OperatingSystems = ops,
+                ParallelProcessing = pp,
+                Pedagogy = pgg,
+                ProgrammingLanguages = plg,
+                Research = rsc,
+                Security = sec,
+                SoftwareEngineering = swe,
+                SystemsAnalysisandDesign = sad,
+                UsingTechnologyintheClassroom = tec,
+                WebandInternetProgramming = wip,
+                Other = oth,
                 )
 
             
@@ -318,17 +446,7 @@ def reviewSubmitForm():
 @app.route('/viewForm')
 @login_required
 def viewForm():
-    author = Author.query.filter_by(EmailAddress=current_user.EmailAddress).first()
-    reviewer = Reviewer.query.filter_by(EmailAddress=current_user.EmailAddress).first()
-  
-    if author:
-        userType = 'author'
-    elif reviewer:
-        userType = 'reviewer'
-
-
-
-    return render_template('viewForm.html',user=current_user, userType=userType)
+    return render_template('viewForm.html',user=current_user)
 
 
 def fake_upload():

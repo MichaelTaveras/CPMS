@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	
+  <head>
+      <title>Paper Review Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" href="static/styles/stylesReviewForm.css">
+    <style>
+    </style>
+  </head>
+  
+  <body>
+    <div class="testbox">
+	  <script language="javascript" src="static/scripts/nav.js"></script>
+
+     <form method="POST">
+      <div class="banner">
+        <h1>Review Form</h1>
+      </div>
+
+      <div class="colums">
+
+        <div class="item">
+     <label for="FirstName">First Name</label>
+     <input id="fname" type="text" name="FirstName" value={{user.FirstName}}>
+        </div>
+   
+        <div class="item">
+     <label for="MiddleInitial"> Middle Initial</label>
+     <input id="MiddleInitial" type="text" name="MiddleInitial" value={{user.MiddleInitial}}>
+        </div>
+   
+        <div class="item">
+     <label for="LastName"> Last Name</label>
+     <input id="LastName" type="text" name="LastName" value={{user.LastName}}>
+        </div>
+		
+	<div class="item">
+     <label for="PaperTitle"> Paper Title</label>
+     <input id="PaperTitle" type="text" name="Paper Title" placeholder="Title of Paper" value=""><!-- value={{user.LastName}} -->
+    </div>
+
+        </div>
+		
+	<h2>Content</h2>
+<label for="topics">Please score each item by selecting the correct one.</label>
+
+<div>
+</div>
+<label for="AoT">Appropriate of Topic:</label>
+<select id="AoT">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>
+ <br><label for="ToT">Timeliness of Topic:</label>
+<select id="ToT">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>  
+ <br><label for="SE">Supportive Evidence:</label>
+<select id="SE">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+ <br><label for="TQ">Technical Quality:</label>
+<select id="TQ">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+ <br><label for="SoC">Scope of Coverage:</label>
+<select id="SoC">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+ <br><label for="CPV">Citation of Previous Work:</label>
+<select id="CPV">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+ <br><label for="Orig">Originality:</label>
+<select id="Orig">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+    <input type="text" list="topics" placeholder="Content Comments">
+   
+   	<h2>Written Document</h2>
+<div>
+</div>
+<label for="OoP">Organization of Paper:</label>
+<select id="OoP">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>
+ <br><label for="CMM">Clarity of Main Message:</label>
+<select id="CMM">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>  
+ <br><label for="mech">Mechanics (grammer, etc.):</label>
+<select id="mech">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select> 
+    <input type="text" list="topics" placeholder="Written Document Comments">
+	
+	<h2>Potential for Oral Presentation</h2>
+<div>
+</div>
+<label for="SfP">Suitability for Presentation:</label>
+<select id="SfP">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>
+ <br><label for="PIT">Potential Interest in Topic:</label>
+<select id="PIT">
+  <option value="poor" selected>Poor</option>
+  <option value="fair">Fair</option>
+  <option value="avg">Average</option>
+  <option value="good">Good</option>
+  <option value="excell">Excellent</option>
+</select>  
+    <input type="text" list="topics" placeholder="Potential for Oral Presentation Comments">
+	
+	<h2>Overall Rating</h2>
+<div>
+</div>
+<label for="OverRate">Overall Rating:</label>
+<select id="OverRate">
+  <option value="poor" selected>Definitely Should Not Accept Paper</option>
+  <option value="fair">Probably Should Not Accept Paper</option>
+  <option value="avg">Uncertain About Acceptance of Paper</option>
+  <option value="good">Probably Should Accept Paper</option>
+  <option value="excell">Definitely Should Accept Paper</option>
+</select>
+    <input type="text" list="topics" placeholder="Overall Rating Comments">
+	
+   <div class="btn-block">
+     <button type="submit" href="/">Submit Review</button>
+   </div>
+   <script language="javascript" src="static/scripts/FOOTER.js"></script>
+ </form>
+    </div>
+  </body>
+</html>

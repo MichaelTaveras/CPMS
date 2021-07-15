@@ -77,6 +77,7 @@ class Reviewer(db.Model, UserMixin):
     SystemsAnalysisandDesign = db.Column(db.Boolean)
     UsingTechnologyintheClassroom = db.Column(db.Boolean)
     WebandInternetProgramming = db.Column(db.Boolean)
+    Other = db.Column(db.Boolean)
 
      # uses reviewerID for getting ID
     def get_id(self):
@@ -94,7 +95,6 @@ class Paper(db.Model,UserMixin):
     FileData      = db.Column(db.LargeBinary)
     Title         = db.Column(db.String(500))
     Certification = db.Column(db.String(3))
-
     AnalysisOfAlgorithms = db.Column(db.Boolean)
     Applications = db.Column(db.Boolean)
     Architecture = db.Column(db.Boolean)
