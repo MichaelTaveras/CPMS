@@ -1,4 +1,6 @@
+from operator import le
 from os import remove
+import os
 from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash, session, Blueprint
 import sqlalchemy
 from sqlalchemy.sql.functions import user
@@ -136,7 +138,114 @@ def paperSubmitForm():
         title = request.form.get('Title')
         file = request.files['File']
         fileName = file.filename
-    
+
+        aa = False
+        app = False
+        arc = False
+        ai = False
+        ce = False
+        curr = False
+        dst = False
+        dab = False
+        dl = False
+        dsy = False
+        esi = False
+        fyc = False
+        gi = False 
+        gw = False 
+        gip = False
+        hci = False
+        labe = False
+        lit = False
+        mic = False
+        mm = False
+        ndc = False
+        nmc = False
+        ooi = False
+        ops = False
+        pp = False
+        pgg = False
+        plg = False
+        rsc = False
+        sec = False
+        swe = False
+        sad = False
+        tec = False
+        wip = False
+        oth = False
+
+
+        topics = request.form.getlist('topics')
+        for topic in topics:
+            if topic == "AA":
+                aa = True
+            elif topic == "APP":
+                app = True
+            elif topic == "ARC":
+                arc = True
+            elif topic == "AI":
+                ai = True
+            elif topic == "CE":    
+                ce = True
+            elif topic == "CURR":
+                curr = True
+            elif topic == "DST":
+                dst = True
+            elif topic == "DB":
+                dab = True
+            elif topic == "DL":
+                dl = True
+            elif topic == "DSY":
+                dsy = True
+            elif topic == "ESI":
+                esi = True
+            elif topic == "FYC":
+                fyc = True
+            elif topic == "GI":
+                gi = True
+            elif topic == "GW":
+                gw = True
+            elif topic == "GIP":
+                gip = True
+            elif topic == "HCI":
+                hci = True
+            elif topic == "LE":
+                labe = True
+            elif topic == "LIT":
+                lit = True
+            elif topic == "MIC":
+                mic = True
+            elif topic == "MM":
+                mm = True
+            elif topic == "NDC":
+                ndc = True
+            elif topic == "NMC":
+                nmc = True
+            elif topic == "OOI":
+                ooi = True
+            elif topic == "OS":
+                ops = True
+            elif topic == "PP":
+                pp = True
+            elif topic == "PGG":
+                pgg = True
+            elif topic == "PLG":
+                plg = True
+            elif topic == "RSC":
+                rsc = True
+            elif topic == "SEC":
+                sec = True
+            elif topic == "SWE":
+                swe = True
+            elif topic == "SAD":
+                sad = True
+            elif topic == "TEC":
+                tec = True
+            elif topic == "WIP":
+                wip = True
+            elif topic == "OTH":
+                oth  = True 
+
         # file.save(file.filename)
         if len(title) > 500:
             flash('Title is too long.', category='error')
@@ -149,6 +258,40 @@ def paperSubmitForm():
                 AuthorID=current_user.AuthorID, 
                 FileName=fileName, 
                 # FileData= file
+                AnalysisofAlgorithms = aa,
+                Applications = app,
+                Architecture = arc,
+                ArtificialIntelligence = ai,
+                ComputerEngineering = ce,
+                Curriculum = curr,
+                DataStructures = dst,
+                Databases = dab,
+                DistanceLearning = dl,
+                DistributedSystems = dsy,
+                EthicalSocietalIssues = esi,
+                FirstYearComputing = fyc,
+                GenderIssues = gi,
+                GrantWriting = gw,
+                GraphicsImageProcessing = gip,
+                HumanComputerInteration = hci,
+                LaboratoryEnvironments = labe,
+                Literacy = lit,
+                MathematicsinComputing = mic,
+                Multimedia = mm,
+                NetworkingDataCommunications = ndc,
+                NonMajorCourses= nmc,
+                ObjectOrientedIssues = ooi,
+                OperatingSystems = ops,
+                ParallelProcessing = pp,
+                Pedagogy = pgg,
+                ProgrammingLanguages = plg,
+                Research = rsc,
+                Security = sec,
+                SoftwareEngineering = swe,
+                SystemsAnalysisandDesign = sad,
+                UsingTechnologyintheClassroom = tec,
+                WebandInternetProgramming = wip,
+                Other = oth,
                 )
 
             
@@ -156,9 +299,6 @@ def paperSubmitForm():
             db.session.commit()
             flash('Paper Submitted!', category='success')
             return redirect(url_for('app.index'))
-
-
-
 
 
     return render_template('paperSubmitForm.html',user=current_user)
@@ -297,33 +437,3 @@ def reviewSubmitForm():
 @login_required
 def viewForm():
     return render_template('viewForm.html',user=current_user)
-
-
-def fake_upload():
-    
-    #paper_1 = Paper(AuthorID=1, FileName="paper one", Title="paper title")
-    
-    # reviewerID = Reviewer.query.all()[0].ReviewerID
-    # print(reviewerID)
-
-    
-    # papers = Paper.query.all()
-    # for paper in papers:
-    #     print(paper.PaperID)
-    # review_1 = Review(PaperID=1, ReviewerID=1)
-    # review_2 = Review(PaperID=2, ReviewerID=1)
-    # review_3 = Review(PaperID=3, ReviewerID=1)
-
-    # db.session.add(review_1)
-    # db.session.add(review_2)
-    # db.session.add(review_3)
-
-    # db.session.commit()
-
-    print(Review.query.all())
-
-    
-    
-    #print(Paper.query.all())
-    
-

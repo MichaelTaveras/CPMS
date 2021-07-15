@@ -77,6 +77,7 @@ class Reviewer(db.Model, UserMixin):
     SystemsAnalysisandDesign = db.Column(db.LargeBinary(1))
     UsingTechnologyintheClassroom = db.Column(db.LargeBinary(1))
     WebandInternetProgramming = db.Column(db.LargeBinary(1))
+    Other = db.Column(db.LargeBinary(1))
 
      # uses reviewerID for getting ID
     def get_id(self):
@@ -127,6 +128,7 @@ class Paper(db.Model,UserMixin):
     SystemsAnalysisandDesign = db.Column(db.LargeBinary(1))
     UsingTechnologyintheClassroom = db.Column(db.LargeBinary(1))
     WebandInternetProgramming = db.Column(db.LargeBinary(1))
+    Other = db.Column(db.LargeBinary(1))
 
 
 # model for reviews
