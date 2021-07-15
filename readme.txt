@@ -2,9 +2,9 @@ Group 15 Project- Michael Taveras, Justina Le, Camila Vizcaya, Reynaldo Sanchez
 
 Readme file where we add info as needed.
 
-Last updated 7/6/2021 @ 12:34AM
+Last updated 7/14/2021
 
-Work in progress using Flash/Python
+Work in progress using Flask/Python
 
 
 How To Run Application:
