@@ -298,6 +298,11 @@ def reviewSubmitForm():
 def viewForm():
     return render_template('viewForm.html',user=current_user)
 
+@app.route('/ReviewForm')
+@login_required
+def ReviewForm():
+    return render_template('ReviewForm.html', user=current_user)
+
 
 def fake_upload():
     
