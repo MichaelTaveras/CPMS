@@ -32,14 +32,14 @@ def LoginForm():
         if author:
             if check_password_hash(author.Password, password):
                  flash('You have been successfully logged in.', category='succes')
-                 login_user(author, remember=remember)
+                 login_user(author, remember=False)
                  return redirect(url_for('app.index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
         elif reviewer:
             if check_password_hash(reviewer.Password, password):
                  flash('You have been successfully logged in.', category='succes')
-                 login_user(reviewer, remember=remember)
+                 login_user(reviewer, remember=False)
                  return redirect(url_for('app.index'))
             else:
                  flash('Wrong password. Please try again.', category='error')
@@ -262,7 +262,7 @@ def RegistrationForm():
             # to database
             db.session.add(newUser)
             db.session.commit()
-            login_user(newUser, remember=True)
+            login_user(newUser, remember=False)
             flash('Account created!', category='success')
 
             return redirect(url_for('app.index'))
@@ -525,6 +525,7 @@ def AccountSettings():
             else:
                 print("Error on user type")
 
+
             # to database
             db.session.commit()
             flash('Account Updated!', category='success')
@@ -564,18 +565,51 @@ def Management():
 # admin author info edit
 @app.route('/manage_author', methods=['GET', 'POST','DELETE'])
 def manage_author(x=None, y=None):
-    # do something to send email
-    print(request.values)
+    authorID = request.args.get("AuthorID")
     if "delete" in request.form:
-        print("delete got called")
-        # author = Author(authorID)
-        # db.session.delete(author)
-        # db.session.commit()
+        author = Author.query.filter_by(AuthorID=authorID).first()
+        db.session.delete(author)
+        db.session.commit()
     elif "edit" in request.form:
-        print("edit got called")
-    authors = get_authors()
+        print(f"edit got called for {authorID}")
     
-    return render_template('Management.html',user=current_user, authors=authors)
+    return redirect("Management", code=200)
+
+@app.route('/manage_reviewer', methods=['GET', 'POST','DELETE'])
+def manage_reviewer(x=None, y=None):
+    reviewerID = request.args.get("ReviewerID")
+    if "delete" in request.form:
+        reviewer = Reviewer.query.filter_by(ReviewerID=reviewerID).first()
+        db.session.delete(reviewer)
+        db.session.commit()
+    elif "edit" in request.form:
+        print(f"edit got called for {reviewerID}")
+    
+    return redirect("Management", code=200)
+
+@app.route('/manage_review', methods=['GET', 'POST','DELETE'])
+def manage_review(x=None, y=None):
+    reviewID = request.args.get("ReviewID")
+    if "delete" in request.form:
+        review = Review.query.filter_by(ReviewID=reviewID).first()
+        db.session.delete(review)
+        db.session.commit()
+    elif "edit" in request.form:
+        print(f"edit got called for {reviewID}")
+    
+    return redirect("Management", code=200)
+
+@app.route('/manage_paper', methods=['GET', 'POST','DELETE'])
+def manage_paper(x=None, y=None):
+    paperID = request.args.get("PaperID")
+    if "delete" in request.form:
+        paper = Paper.query.filter_by(PaperID=paperID).first()
+        db.session.delete(paper)
+        db.session.commit()
+    elif "edit" in request.form:
+        print(f"edit got called for {paperID}")
+    
+    return redirect("Management", code=200)
 
 # admin paper to review page
 @app.route('/PaperReview')
@@ -766,3 +800,4 @@ def get_papers():
 # account settings update
 # link papers to review
 # review form page access
+

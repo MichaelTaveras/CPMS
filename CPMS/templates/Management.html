@@ -29,7 +29,7 @@
   <!-- AUTHORS -->
   {% for author in authors %}
      
-      <form action="/manage_author" method="post">
+      <form action="/manage_author?AuthorID={{author.AuthorID}}" method="post">
         <div name="name" class="filterDiv authors"> {{author.FirstName}} {{author.LastName}}
         <button type="submit" name="delete" class="btninfo">Remove Author</button>
         <button type="submit" name="edit" class="btninfo">Edit Author Information</button>
@@ -39,35 +39,33 @@
   {% endfor %}
 
   {% for reviewer in reviewers%}
-  <form action="/manage_reviewer" method="post">
+  <form action="/manage_reviewer?ReviewerID={{reviewer.ReviewerID}}" method="post">
     <div class="filterDiv reviewers"> {{reviewer.FirstName}} {{reviewer.LastName}}
-    
-    <button type="submit" class="btninfo">Remove Reviewer</button>
-    
-    <button class="btninfo">Edit Reviewer Information</button>
+    <button type="submit" name="delete" class="btninfo">Remove Reviewer</button>
+    <button type="submit" name="edit" class="btninfo">Edit Reviewer Information</button>
   </div>
   </form>
   {% endfor %}
 
   {% for paper in papers %}
-  <form action="/manage_paper" method="post">
+  <form action="/manage_paper?PaperID={{paper.PaperID}}" method="post">
     <div class="filterDiv papers"> {{paper.Title}} 
     
-    <button type="submit" class="btninfo">Remove Paper</button>
+    <button type="submit" name="delete" class="btninfo">Remove Paper</button>
     
-    <button class="btninfo">Edit Paper Information</button>
+    <button type="submit" name="edit" class="btninfo">Edit Paper Information</button>
   </div>
   </form>
   {% endfor %}
 
   {% for review in reviews %}
-  <form action="/manage_review" method="post">
+  <form action="/manage_review?ReviewID={{review.ReviewID}}" method="post">
     <div class="filterDiv reviews"> Review {{review.ReviewID}} 
       
 
-    <button type="submit" class="btninfo">Remove Review</button>
+    <button type="submit" name="delete" class="btninfo">Remove Review</button>
     
-    <button class="btninfo">Edit Review Information</button>
+    <button type="submit" name="edit" class="btninfo">Edit Review Information</button>
   </div>
   </form>
   {% endfor %}
